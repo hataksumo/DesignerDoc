@@ -1,4 +1,4 @@
-package com.citc.iot.webdoc.controller.moduleDesign.Request;
+package com.citc.iot.webdoc.controller.moduledesign.Request;
 
 import lombok.Data;
 

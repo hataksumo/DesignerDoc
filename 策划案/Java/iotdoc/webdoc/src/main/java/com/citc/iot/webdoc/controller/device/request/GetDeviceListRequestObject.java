@@ -1,6 +1,6 @@
 package com.citc.iot.webdoc.controller.device.request;
 
-import com.citc.iot.webdoc.common.enums.EDeviceSortType;
+import com.citc.iot.webdoc.common.enums.device.EDeviceSortType;
 import lombok.Data;
 
 @Data

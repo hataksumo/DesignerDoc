@@ -1,7 +1,7 @@
-package com.citc.iot.webdoc.controller.moduleDesign;
+package com.citc.iot.webdoc.controller.moduledesign;
 
 import com.citc.iot.webdoc.common.respond.R;
-import com.citc.iot.webdoc.controller.moduleDesign.Request.*;
+import com.citc.iot.webdoc.controller.moduledesign.Request.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "获取产品列表")
     @RequestMapping(value = "/GetDeviceDesignList",method = {RequestMethod.GET})
-    public R GetDeviceDesignList(@RequestParam Long v_projectId)
+    public R GetDeviceDesignList(@RequestParam Long pProjectId)
     {
         return R.unImplemented();
     }
@@ -27,7 +27,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "创建产品")
     @RequestMapping(value = "/CreateDeviceDesign", method = {RequestMethod.POST})
-    public R CreateDeviceDesign(@RequestBody CreateDeviceDesignRequestObject v_data, HttpServletRequest v_req)
+    public R CreateDeviceDesign(@RequestBody CreateDeviceDesignRequestObject pData, HttpServletRequest pReq)
     {
         return R.unImplemented();
     }
@@ -36,7 +36,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "获取产品详细信息")
     @RequestMapping(value = "/GetDeviceDesignDetil", method = {RequestMethod.GET})
-    public R GetDeviceDesignDetil(@RequestParam("id") Long v_deviceDesignId)
+    public R GetDeviceDesignDetil(@RequestParam("id") Long pDeviceDesignId)
     {
         return R.unImplemented();
     }
@@ -45,7 +45,7 @@ public class DeviceDesignController
      * */
     @ApiOperation(value = "获取该产品下设备数量")
     @RequestMapping(value = "/GetDeviceCnt", method = {RequestMethod.GET})
-    public R GetDeviceCnt(@RequestParam("id") long v_deviceDesignId)
+    public R GetDeviceCnt(@RequestParam("id") long pDeviceDesignId)
     {
         return R.unImplemented();
     }
@@ -55,7 +55,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "获取产品属性")
     @RequestMapping(value = "/GetAttributes", method = {RequestMethod.GET})
-    public R GetAttributes(@RequestParam("id") Long v_deviceDesignId)
+    public R GetAttributes(@RequestParam("id") Long pDeviceDesignId)
     {
         return R.unImplemented();
     }
@@ -64,7 +64,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "添加一个属性")
     @RequestMapping(value = "/AddAttributeItem", method = {RequestMethod.POST})
-    public R AddAttributeItem(@RequestBody AddUpDataAttributeRequestObject v_data)
+    public R AddAttributeItem(@RequestBody AddUpDataAttributeRequestObject pData)
     {
         return R.unImplemented();
     }
@@ -73,7 +73,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "获得一个属性的详细信息")
     @RequestMapping(value = "/AddAttributeItem", method = {RequestMethod.GET})
-    public R GetAttributeItem(@RequestParam("id") Long v_deviceDesignId,@RequestParam("name") String v_name)
+    public R GetAttributeItem(@RequestParam("id") Long pDeviceDesignId,@RequestParam("name") String pName)
     {
         return R.unImplemented();
     }
@@ -82,7 +82,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "编辑属性")
     @RequestMapping(value = "/EditAttributeItem", method = {RequestMethod.POST})
-    public R EditAttributeItem(@RequestBody AddUpDataAttributeRequestObject v_data)
+    public R EditAttributeItem(@RequestBody AddUpDataAttributeRequestObject pData)
     {
         return R.unImplemented();
     }
@@ -91,7 +91,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "删除属性")
     @RequestMapping(value = "/DeleteAttributeItem", method = {RequestMethod.GET})
-    public R DeleteAttributeItem(@RequestParam("id") Long v_deviceDesignId,@RequestParam("name") String v_name)
+    public R DeleteAttributeItem(@RequestParam("id") Long pDeviceDesignId,@RequestParam("name") String pName)
     {
         return R.unImplemented();
     }
@@ -101,7 +101,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "获得命令列表")
     @RequestMapping(value = "/GetCommandList", method = {RequestMethod.GET})
-    public R GetCommandList(@RequestParam("id") Long v_deviceDesignId)
+    public R GetCommandList(@RequestParam("id") Long pDeviceDesignId)
     {
         return R.unImplemented();
     }
@@ -110,7 +110,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "创建一个命令")
     @RequestMapping(value = "/CreateCommand", method = {RequestMethod.POST})
-    public R CreateCommand(CreateCommandRequestObject v_data)
+    public R CreateCommand(CreateCommandRequestObject pData)
     {
         return R.unImplemented();
     }
@@ -119,7 +119,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "获得一个命令的详细信息")
     @RequestMapping(value = "/GetCommandDetail", method = {RequestMethod.GET})
-    public R GetCommandDetail(@RequestParam("id") Long v_deviceDesignId,@RequestParam("name") String v_cmdName)
+    public R GetCommandDetail(@RequestParam("id") Long pDeviceDesignId,@RequestParam("name") String pCmdName)
     {
         return R.unImplemented();
     }
@@ -129,7 +129,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "为特定命令添加一个属性")
     @RequestMapping(value = "/AddCommandAttribute", method = {RequestMethod.POST})
-    public R AddCommandAttribute(@RequestBody AddCmdAttributeRequestObject v_data)
+    public R AddCommandAttribute(@RequestBody AddCmdAttributeRequestObject pData)
     {
         return R.unImplemented();
     }
@@ -138,9 +138,9 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "获得一个命令的详细信息")
     @RequestMapping(value = "/GetCmdAttributeItem", method = {RequestMethod.GET})
-    public R GetCmdAttributeItem(@RequestParam("id") Long v_deviceDesignId,
-                                 @RequestParam("cmdName") String v_cmdName,
-                                 @RequestParam("attrName") String v_attrName)
+    public R GetCmdAttributeItem(@RequestParam("id") Long pDeviceDesignId,
+                                 @RequestParam("cmdName") String pCmdName,
+                                 @RequestParam("attrName") String pAttrName)
     {
         return R.unImplemented();
     }
@@ -150,7 +150,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "编辑一个命令属性")
     @RequestMapping(value = "/EditCmdAttribute", method = {RequestMethod.POST})
-    public R EditCmdAttribute(@RequestBody CreateCommandRequestObject v_data)
+    public R EditCmdAttribute(@RequestBody CreateCommandRequestObject pData)
     {
         return R.unImplemented();
     }
@@ -160,9 +160,9 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "删除一个命令属性")
     @RequestMapping(value = "/DeleteCmdAttributeItem", method = {RequestMethod.GET})
-    public R DeleteCmdAttributeItem(@RequestParam("id") Long v_deviceDesignId,
-                                    @RequestParam("cmdName") String v_cmdName,
-                                    @RequestParam("attrName") String v_attrName)
+    public R DeleteCmdAttributeItem(@RequestParam("id") Long pDeviceDesignId,
+                                    @RequestParam("cmdName") String pCmdName,
+                                    @RequestParam("attrName") String pAttrName)
     {
         return R.unImplemented();
     }
@@ -171,7 +171,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "导出模型配置")
     @RequestMapping(value = "/OutputConfig", method = {RequestMethod.GET})
-    public R OutputConfig(@RequestParam("id") Long v_deviceDesignId)
+    public R OutputConfig(@RequestParam("id") Long pDeviceDesignId)
     {
         return R.unImplemented();
     }
@@ -181,7 +181,7 @@ public class DeviceDesignController
     * */
     @ApiOperation(value = "使用配置文件初始化")
     @RequestMapping(value = "/InitWithConfig", method = {RequestMethod.POST})
-    public R InitWithConfig(@RequestBody InitWithConfigRequestObject v_data)
+    public R InitWithConfig(@RequestBody InitWithConfigRequestObject pData)
     {
         return R.unImplemented();
     }

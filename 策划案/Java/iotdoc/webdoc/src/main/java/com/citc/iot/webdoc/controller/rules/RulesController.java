@@ -14,70 +14,70 @@ public class RulesController
 {
     @ApiOperation(value = "获取规则列表",notes = "根据项目Id获取规则列表")
     @RequestMapping(value = "/getRuleList",method = {RequestMethod.GET})
-    public R getRuleList(@RequestParam("projectId") Long v_projectId)
+    public R getRuleList(@RequestParam("projectId") Long pProjectId)
     {
         return R.unImplemented();
     }
 
     @ApiOperation(value = "启用规则")
     @RequestMapping(value = "/enableRule",method = {RequestMethod.GET})
-    public R enableRule(@RequestParam("ruleId") Long v_ruleId)
+    public R enableRule(@RequestParam("ruleId") Long pRuleId)
     {
         return R.unImplemented();
     }
 
     @ApiOperation(value = "禁用规则")
     @RequestMapping(value = "/disableRule",method = {RequestMethod.GET})
-    public R disableRule(@RequestParam("ruleId") Long v_ruleId)
+    public R disableRule(@RequestParam("ruleId") Long pRuleId)
     {
         return R.unImplemented();
     }
 
     @ApiOperation(value = "获取规则信息")
     @RequestMapping(value = "/getRuleDetail",method = {RequestMethod.GET})
-    public R getRuleDetail(@RequestParam("ruleId") Long v_ruleId)
+    public R getRuleDetail(@RequestParam("ruleId") Long pRuleId)
     {
         return R.unImplemented();
     }
 
     @ApiOperation(value = "获取规则条件")
     @RequestMapping(value = "/getRuleConditions",method = {RequestMethod.GET})
-    public R getRuleConditions(@RequestParam("ruleId") Long v_ruleId)
+    public R getRuleConditions(@RequestParam("ruleId") Long pRuleId)
     {
         return R.unImplemented();
     }
 
     @ApiOperation(value = "获取规则动作")
     @RequestMapping(value = "/getRuleActions",method = {RequestMethod.GET})
-    public R getRuleActions(@RequestParam("ruleId") Long v_ruleId)
+    public R getRuleActions(@RequestParam("ruleId") Long pRuleId)
     {
         return R.unImplemented();
     }
 
     @ApiOperation(value = "创建规则")
     @RequestMapping(value = "/createRule",method = {RequestMethod.POST})
-    public R createRule(@RequestBody CreateRuleRequestObject v_data)
+    public R createRule(@RequestBody CreateRuleRequestObject pData)
     {
         return R.unImplemented();
     }
 
     @ApiOperation(value = "编辑规则")
     @RequestMapping(value = "/editRule",method = {RequestMethod.POST})
-    public R editRule(@RequestBody EditRuleRequestObject v_data)
+    public R editRule(@RequestBody EditRuleRequestObject pData)
     {
         return R.unImplemented();
     }
 
     @ApiOperation(value = "删除条件")
     @RequestMapping(value = "/deleteCondition",method = {RequestMethod.GET})
-    public R deleteCondition(@RequestParam("ruleId") Long v_ruleId,@RequestParam("loc") int v_loc)
+    public R deleteCondition(@RequestParam("ruleId") Long pRuleId,@RequestParam("loc") int pLoc)
     {
         return R.unImplemented();
     }
 
     @ApiOperation(value = "删除动作")
     @RequestMapping(value = "/deleteAction",method = {RequestMethod.GET})
-    public R deleteAction(@RequestParam("ruleId") Long v_ruleId,@RequestParam("loc") int v_loc)
+    public R deleteAction(@RequestParam("ruleId") Long pRuleId,@RequestParam("loc") int pLoc)
     {
         return R.unImplemented();
     }

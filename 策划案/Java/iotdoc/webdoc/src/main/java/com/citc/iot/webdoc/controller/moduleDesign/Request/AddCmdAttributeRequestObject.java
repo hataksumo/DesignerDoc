@@ -1,7 +1,7 @@
-package com.citc.iot.webdoc.controller.moduleDesign.Request;
+package com.citc.iot.webdoc.controller.moduledesign.Request;
 
-import com.citc.iot.webdoc.common.dataDefine.AttributeConstraint;
-import com.citc.iot.webdoc.common.dataDefine.CommandAttribute;
+import com.citc.iot.webdoc.common.dto.devicedesign.AttributeConstraintDto;
+import com.citc.iot.webdoc.common.dto.devicedesign.CommandAttributeDto;
 import lombok.Data;
 
 @Data
@@ -9,6 +9,6 @@ public class AddCmdAttributeRequestObject
 {
     long deviceDesignId;
     String cmdName;
-    CommandAttribute attribute;
-    AttributeConstraint constraint;
+    CommandAttributeDto attribute;
+    AttributeConstraintDto constraint;
 }

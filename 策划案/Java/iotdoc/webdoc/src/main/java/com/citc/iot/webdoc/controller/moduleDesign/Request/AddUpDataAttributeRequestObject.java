@@ -1,13 +1,13 @@
-package com.citc.iot.webdoc.controller.moduleDesign.Request;
+package com.citc.iot.webdoc.controller.moduledesign.Request;
 
-import com.citc.iot.webdoc.common.dataDefine.Attribute;
-import com.citc.iot.webdoc.common.dataDefine.AttributeConstraint;
+import com.citc.iot.webdoc.common.dto.devicedesign.AttributeDto;
+import com.citc.iot.webdoc.common.dto.devicedesign.AttributeConstraintDto;
 import lombok.Data;
 
 @Data
 public class AddUpDataAttributeRequestObject
 {
     long deviceDesignId;
-    Attribute attribute;
-    AttributeConstraint constraint;
+    AttributeDto attribute;
+    AttributeConstraintDto constraint;
 }

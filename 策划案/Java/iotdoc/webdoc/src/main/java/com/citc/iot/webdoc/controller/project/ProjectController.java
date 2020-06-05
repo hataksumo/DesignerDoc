@@ -13,14 +13,14 @@ public class ProjectController
 {
     @ApiOperation(value = "获取各子模块数量信息")
     @RequestMapping(value = "/getResItemsView",method = {RequestMethod.GET})
-    public R getResItemsView(@RequestParam(value="id") Long v_id)
+    public R getResItemsView(@RequestParam(value="id") Long pId)
     {
         return R.unImplemented();
     }
 
     @ApiOperation(value = "创建项目")
     @RequestMapping(value = "/createProject",method = {RequestMethod.POST})
-    public R createProject(@RequestBody CreateProjectRequestObject v_data)
+    public R createProject(@RequestBody CreateProjectRequestObject pData)
     {
         return R.unImplemented();
     }

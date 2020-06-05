@@ -22,7 +22,7 @@ public class overviewController
 
     @ApiOperation(value="获取资源Id")
     @RequestMapping(value = "/GetResId",method = {RequestMethod.GET})
-    public R GetResId(@RequestParam(value="id") long v_id)
+    public R GetResId(@RequestParam(value="id") long pId)
     {
         return R.unImplemented();
     }

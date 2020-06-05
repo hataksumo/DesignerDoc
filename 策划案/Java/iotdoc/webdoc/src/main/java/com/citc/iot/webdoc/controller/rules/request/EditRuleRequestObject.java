@@ -1,10 +1,9 @@
 package com.citc.iot.webdoc.controller.rules.request;
 
-import com.citc.iot.webdoc.common.dataDefine.rules.RuleAction;
-import com.citc.iot.webdoc.common.dataDefine.rules.RuleConditionSet;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import com.citc.iot.webdoc.common.dto.rules.*;
 
 import java.util.List;
 
@@ -21,6 +20,6 @@ public class EditRuleRequestObject
     @ApiModelProperty(value="触发间隔，单位秒",example = "7200")
     int triggerInteval;
     @ApiModelProperty(value="规则集合")
-    RuleConditionSet conditionSet;
-    List<RuleAction> actions;
+    RuleConditionSetDto conditionSet;
+    List<RuleActionDto> actions;
 }

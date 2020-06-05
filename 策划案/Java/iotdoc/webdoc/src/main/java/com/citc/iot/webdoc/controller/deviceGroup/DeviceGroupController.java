@@ -1,8 +1,8 @@
-package com.citc.iot.webdoc.controller.deviceGroup;
+package com.citc.iot.webdoc.controller.devicegroup;
 
 import com.citc.iot.webdoc.common.respond.R;
-import com.citc.iot.webdoc.controller.deviceGroup.request.AddDeviceGroupRequestObject;
-import com.citc.iot.webdoc.controller.deviceGroup.request.EditDeviceGroupRequestObject;
+import com.citc.iot.webdoc.controller.devicegroup.request.AddDeviceGroupRequestObject;
+import com.citc.iot.webdoc.controller.devicegroup.request.EditDeviceGroupRequestObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class DeviceGroupController
     * */
     @ApiOperation(value = "创建群组")
     @RequestMapping(value = "/AddDeviceGroup",method = {RequestMethod.POST})
-    public R AddDeviceGroup(@RequestBody AddDeviceGroupRequestObject v_data)
+    public R AddDeviceGroup(@RequestBody AddDeviceGroupRequestObject pData)
     {
         return R.unImplemented();
     }
@@ -29,7 +29,7 @@ public class DeviceGroupController
     * */
     @ApiOperation(value = "编辑设备群组详情")
     @RequestMapping(value ="/EditDeviceGroupDesc",method = {RequestMethod.POST})
-    public R EditDeviceGroupDesc(@RequestBody EditDeviceGroupRequestObject v_data)
+    public R EditDeviceGroupDesc(@RequestBody EditDeviceGroupRequestObject pData)
     {
         return R.unImplemented();
     }
@@ -39,7 +39,7 @@ public class DeviceGroupController
     * */
     @ApiOperation(value = "删除设备群组")
     @RequestMapping(value ="/DeleteDeviceGroup",method = {RequestMethod.GET})
-    public R DeleteDeviceGroup(@RequestParam("id") Long v_id)
+    public R DeleteDeviceGroup(@RequestParam("id") Long pId)
     {
         return R.unImplemented();
     }
@@ -49,7 +49,7 @@ public class DeviceGroupController
     * */
     @ApiOperation(value = "获取群组信息")
     @RequestMapping(value ="/GetGroupInfo",method = {RequestMethod.GET})
-    public R GetGroupInfo(@RequestParam("id")  Long v_id)
+    public R GetGroupInfo(@RequestParam("id")  Long pId)
     {
         return R.unImplemented();
     }
@@ -59,7 +59,7 @@ public class DeviceGroupController
     * */
     @ApiOperation(value = "绑定设备")
     @RequestMapping(value ="/BindDevices",method = {RequestMethod.POST})
-    public R BindDevices(@RequestBody List<Long> v_ids)
+    public R BindDevices(@RequestBody List<Long> pIds)
     {
         return R.unImplemented();
     }
@@ -69,7 +69,7 @@ public class DeviceGroupController
     * */
     @ApiOperation(value = "绑定规则")
     @RequestMapping(value ="/BindRules",method = {RequestMethod.POST})
-    public R BindRules(@RequestBody List<Long> v_ids)
+    public R BindRules(@RequestBody List<Long> pIds)
     {
         return R.unImplemented();
     }
@@ -79,7 +79,7 @@ public class DeviceGroupController
     * */
     @ApiOperation(value = "获取当前群组适用的规则(包括父群组的规则，必须激活态)")
     @RequestMapping(value ="/GetActiveRules",method = {RequestMethod.GET})
-    public R GetActiveRules(@RequestParam("id") Long v_id)
+    public R GetActiveRules(@RequestParam("id") Long pId)
     {
         return R.unImplemented();
     }
@@ -89,7 +89,7 @@ public class DeviceGroupController
     * */
     @ApiOperation(value = "获取设备列表,包括子群组")
     @RequestMapping(value ="/GetDeviceList",method = {RequestMethod.GET})
-    public R GetDeviceList(@RequestParam("id") Long v_id,@RequestParam("pageId") int v_pageId)
+    public R GetDeviceList(@RequestParam("id") Long pId,@RequestParam("pageId") int v_pageId)
     {
         return R.unImplemented();
     }

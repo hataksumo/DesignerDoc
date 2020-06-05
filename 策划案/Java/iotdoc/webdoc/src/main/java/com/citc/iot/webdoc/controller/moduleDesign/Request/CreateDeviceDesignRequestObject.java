@@ -1,7 +1,7 @@
-package com.citc.iot.webdoc.controller.moduleDesign.Request;
+package com.citc.iot.webdoc.controller.moduledesign.Request;
 
-import com.citc.iot.webdoc.common.enums.ENetworkProtocal;
-import com.citc.iot.webdoc.common.enums.ENetworkProtocalFormate;
+import com.citc.iot.webdoc.common.enums.devicedesign.ENetworkProtocal;
+import com.citc.iot.webdoc.common.enums.devicedesign.ENetworkProtocalFormate;
 import lombok.Data;
 
 @Data

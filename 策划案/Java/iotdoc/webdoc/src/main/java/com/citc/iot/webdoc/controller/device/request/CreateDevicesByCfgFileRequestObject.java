@@ -1,6 +1,6 @@
 package com.citc.iot.webdoc.controller.device.request;
 
-import com.citc.iot.webdoc.common.enums.EDupIdHandle;
+import com.citc.iot.webdoc.common.enums.device.EDupIdHandle;
 import lombok.Data;
 
 @Data

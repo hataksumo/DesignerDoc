@@ -1,4 +1,4 @@
-package com.citc.iot.webdoc.controller.deviceGroup.request;
+package com.citc.iot.webdoc.controller.devicegroup.request;
 
 import lombok.Data;
 
