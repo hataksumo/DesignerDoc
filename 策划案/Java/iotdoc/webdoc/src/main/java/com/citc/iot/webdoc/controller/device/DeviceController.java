@@ -7,6 +7,9 @@ import com.citc.iot.webdoc.controller.device.response.DeviceBatchCreateResponseO
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author 织法酱
+ */
 @Api(tags = "设备模块")
 @RestController
 @RequestMapping("/Device")

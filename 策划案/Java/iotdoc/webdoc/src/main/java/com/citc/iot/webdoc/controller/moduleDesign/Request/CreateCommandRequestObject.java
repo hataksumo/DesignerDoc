@@ -1,7 +1,10 @@
-package com.citc.iot.webdoc.controller.moduledesign.Request;
+package com.citc.iot.webdoc.controller.moduledesign.request;
 
 import lombok.Data;
 
+/**
+ * @author 织法酱
+ */
 @Data
 public class CreateCommandRequestObject
 {

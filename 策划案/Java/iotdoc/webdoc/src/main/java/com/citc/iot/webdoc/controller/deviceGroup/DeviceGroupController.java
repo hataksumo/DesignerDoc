@@ -14,9 +14,9 @@ import java.util.List;
 @RequestMapping("/DeviceGroup")
 public class DeviceGroupController
 {
-    /*
+    /**
     * 添加设备群组
-    * */
+    */
     @ApiOperation(value = "创建群组")
     @RequestMapping(value = "/AddDeviceGroup",method = {RequestMethod.POST})
     public R AddDeviceGroup(@RequestBody AddDeviceGroupRequestObject pData)
@@ -24,9 +24,9 @@ public class DeviceGroupController
         return R.unImplemented();
     }
 
-    /*
+    /**
     * 编辑设备群组详情
-    * */
+    */
     @ApiOperation(value = "编辑设备群组详情")
     @RequestMapping(value ="/EditDeviceGroupDesc",method = {RequestMethod.POST})
     public R EditDeviceGroupDesc(@RequestBody EditDeviceGroupRequestObject pData)
@@ -34,9 +34,9 @@ public class DeviceGroupController
         return R.unImplemented();
     }
 
-    /*
+    /**
     * 删除设备群组
-    * */
+    */
     @ApiOperation(value = "删除设备群组")
     @RequestMapping(value ="/DeleteDeviceGroup",method = {RequestMethod.GET})
     public R DeleteDeviceGroup(@RequestParam("id") Long pId)
@@ -44,9 +44,9 @@ public class DeviceGroupController
         return R.unImplemented();
     }
 
-    /*
+    /**
     * 获取群组信息
-    * */
+    */
     @ApiOperation(value = "获取群组信息")
     @RequestMapping(value ="/GetGroupInfo",method = {RequestMethod.GET})
     public R GetGroupInfo(@RequestParam("id")  Long pId)
@@ -54,9 +54,9 @@ public class DeviceGroupController
         return R.unImplemented();
     }
 
-    /*
+    /**
     * 绑定设备
-    * */
+    */
     @ApiOperation(value = "绑定设备")
     @RequestMapping(value ="/BindDevices",method = {RequestMethod.POST})
     public R BindDevices(@RequestBody List<Long> pIds)
@@ -64,9 +64,9 @@ public class DeviceGroupController
         return R.unImplemented();
     }
 
-    /*
+    /**
     * 绑定规则
-    * */
+    */
     @ApiOperation(value = "绑定规则")
     @RequestMapping(value ="/BindRules",method = {RequestMethod.POST})
     public R BindRules(@RequestBody List<Long> pIds)
@@ -74,9 +74,9 @@ public class DeviceGroupController
         return R.unImplemented();
     }
 
-    /*
+    /**
     * 获取当前群组适用的规则(包括父群组的规则，必须激活态)
-    * */
+    */
     @ApiOperation(value = "获取当前群组适用的规则(包括父群组的规则，必须激活态)")
     @RequestMapping(value ="/GetActiveRules",method = {RequestMethod.GET})
     public R GetActiveRules(@RequestParam("id") Long pId)
@@ -84,9 +84,9 @@ public class DeviceGroupController
         return R.unImplemented();
     }
 
-    /*
+    /**
     * 获取设备列表,包括子群组
-    * */
+    */
     @ApiOperation(value = "获取设备列表,包括子群组")
     @RequestMapping(value ="/GetDeviceList",method = {RequestMethod.GET})
     public R GetDeviceList(@RequestParam("id") Long pId,@RequestParam("pageId") int v_pageId)

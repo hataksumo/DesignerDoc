@@ -1,4 +1,4 @@
-package com.citc.iot.webdoc.controller.moduledesign.Request;
+package com.citc.iot.webdoc.controller.moduledesign.request;
 
 import com.citc.iot.webdoc.common.dto.devicedesign.AttributeDto;
 import com.citc.iot.webdoc.common.dto.devicedesign.AttributeConstraintDto;

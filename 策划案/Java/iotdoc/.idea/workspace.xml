@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d2f1c838-491d-49a2-8295-2baeee3d9124" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,11 +40,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../IOT/citc-iot" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -84,6 +87,10 @@
       <workItem from="1591060439678" duration="25145000" />
       <workItem from="1591144480765" duration="6923000" />
       <workItem from="1591844282082" duration="724000" />
+      <workItem from="1592450206567" duration="995000" />
+      <workItem from="1592451262673" duration="1046000" />
+      <workItem from="1592462276720" duration="2801000" />
+      <workItem from="1592466072442" duration="156000" />
     </task>
     <servers />
   </component>
@@ -99,10 +106,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1591065582136" />
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1590997344581">
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1592466210275">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590997344581" />
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1592466210275" />
     <state width="1420" height="282" key="GridCell.Tab.0.bottom" timestamp="1591169033679">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -139,6 +146,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="490" y="174" key="Maven.ArtifactSearchDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590561897617" />
+    <state x="600" y="223" key="NewModule_or_Project.wizard" timestamp="1592465961467">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="600" y="223" key="NewModule_or_Project.wizard/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1592465961467" />
+    <state x="212" y="155" key="SettingsEditor" timestamp="1592451209202">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="212" y="155" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1592451209202" />
     <state x="334" y="180" key="new project wizard" timestamp="1590542439691">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

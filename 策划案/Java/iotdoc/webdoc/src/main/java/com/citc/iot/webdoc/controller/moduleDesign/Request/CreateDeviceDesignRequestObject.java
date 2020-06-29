@@ -1,4 +1,4 @@
-package com.citc.iot.webdoc.controller.moduledesign.Request;
+package com.citc.iot.webdoc.controller.moduledesign.request;
 
 import com.citc.iot.webdoc.common.enums.devicedesign.ENetworkProtocal;
 import com.citc.iot.webdoc.common.enums.devicedesign.ENetworkProtocalFormate;
