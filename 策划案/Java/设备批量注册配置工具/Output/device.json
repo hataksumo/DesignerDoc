@@ -1,0 +1,25 @@
+{
+	"data" : {
+		"player" : [
+			{"deviceName" : "player001","showName" : "玩家1","serc" : "AirCon1_34425","description" : "玩家1的设备","userData" : {"gold" : 1000,"stone" : 0}},
+			{"deviceName" : "player002","showName" : "玩家2","serc" : "AirCon1_43519","description" : "玩家2的设备","userData" : {"gold" : 1200,"stone" : 15,"bag" : {"wp" : {"num" : 1}}}},
+			{"deviceName" : "player003","showName" : "玩家3","serc" : "AirCon1_42599","description" : "玩家3的设备","userData" : {"gold" : 2000,"stone" : 200}},
+			{"deviceName" : "player004","showName" : "玩家4","serc" : "AirCon1_49205","description" : "玩家4的设备","userData" : {"gold" : 1000,"stone" : 160,"bag" : {"wp" : {"num" : 2}}}},
+			{"deviceName" : "player005","showName" : "玩家5","serc" : "AirCon1_6060","description" : "玩家5的设备","userData" : {"gold" : 1200,"stone" : 170}},
+			{"deviceName" : "player006","showName" : "玩家6","serc" : "AirCon1_18477","description" : "玩家6的设备","userData" : {"gold" : 2000,"stone" : 200,"bag" : {"wp" : {"num" : 3}}}},
+			{"deviceName" : "player007","showName" : "玩家7","serc" : "AirCon1_42623","description" : "玩家7的设备","userData" : {"gold" : 1000,"stone" : 250}},
+			{"deviceName" : "player008","showName" : "玩家8","serc" : "AirCon1_29440","description" : "玩家8的设备","userData" : {"gold" : 1200,"stone" : 10,"bag" : {"wp" : {"num" : 4}}}},
+			{"deviceName" : "player009","showName" : "玩家9","serc" : "AirCon1_5838","description" : "玩家9的设备","userData" : {"gold" : 2000,"stone" : 35}},
+			{"deviceName" : "player010","showName" : "玩家10","serc" : "AirCon1_23702","description" : "玩家10的设备","userData" : {"gold" : 1000,"stone" : 6,"bag" : {"wp" : {"num" : 5}}}}
+		],
+		"scene" : [
+			{"deviceName" : "scene1","showName" : "勇者大陆","serc" : "AirCon1_63755","description" : "场景1的设备","userData" : {"name" : "勇者大陆"}},
+			{"deviceName" : "scene2","showName" : "仙踪林","serc" : "AirCon1_1537","description" : "场景2的设备","userData" : {"name" : "仙踪林"}},
+			{"deviceName" : "scene3","showName" : "地下城","serc" : "AirCon1_56819","description" : "场景3的设备","userData" : {"name" : "地下城"}},
+			{"deviceName" : "scene4","showName" : "冰风谷","serc" : "AirCon1_40372","description" : "场景4的设备","userData" : {"name" : "冰风谷"}},
+			{"deviceName" : "scene5","showName" : "亚特兰蒂斯","serc" : "AirCon1_41339","description" : "场景5的设备","userData" : {"name" : "亚特兰蒂斯"}},
+			{"deviceName" : "scene6","showName" : "失落之塔","serc" : "AirCon1_84229","description" : "场景6的设备","userData" : {"name" : "失落之塔"}}
+		]
+	},
+	"excelName" : "device.设备注册.xlsx"
+}
