@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2022/5/25 10:04:21                           */
+/* Created on:     2022/6/7 20:24:55                            */
 /*==============================================================*/
 
 
@@ -33,9 +33,14 @@ alter table bl_hit
 
 drop table if exists bl_hit;
 
-drop index idx_battle_player on bl_player_score;
+drop index idx_player_day on bl_player_battle_day;
 
-drop index idx_del on bl_player_score;
+alter table bl_player_battle_day
+   drop primary key;
+
+drop table if exists bl_player_battle_day;
+
+drop index idx_battle_player on bl_player_score;
 
 alter table bl_player_score
    drop primary key;
@@ -52,8 +57,6 @@ drop table if exists bl_union;
 drop index idx_battle on bl_union_score;
 
 drop index idx_union on bl_union_score;
-
-drop index idx_del on bl_union_score;
 
 alter table bl_union_score
    drop primary key;
@@ -107,7 +110,8 @@ create table bl_battle
    union_id             bigint not null comment '公会的id',
    year                 int not null comment '哪一年的公会战',
    constellation        tinyint not null comment '星座',
-   phase                int not null comment '第几周目',
+   round                int not null comment '第几周目',
+   boss_idx             int not null,
    day                  bool not null comment '目前公会战进行了几天',
    status               tinyint not null comment '公会战的状态，ON_GOING(1), FINISH(2)',
    create_time          timestamp not null comment '创建时间',
@@ -125,7 +129,7 @@ create table bl_battle
 alter table bl_battle comment '公会战';
 
 alter table bl_battle
-   add primary key (id, union_id, year, constellation, phase, day, status);
+   add primary key (id);
 
 /*==============================================================*/
 /* Index: idx_del                                               */
@@ -155,6 +159,8 @@ create table bl_boss
    boss_type            tinyint not null comment 'boss类型',
    hp                   int not null comment '剩余血量',
    alive                bool not null comment '是否存活',
+   phase                int not null comment '阶段',
+   round                int not null comment '周目',
    create_time          timestamp not null comment '创建时间',
    create_by            bigint not null comment '创建用户Id',
    create_name          varchar(32) not null comment '创建者用户名',
@@ -196,8 +202,10 @@ create table bl_hit
    id                   bigint not null comment '主键',
    user_id              bigint not null comment '用户id',
    nick_name            varchar(64) not null comment '用户昵称，冗余字段',
+   union_id             bigint not null comment '公会Id',
    battle_id            bigint not null comment '公会战id',
    boss_id              bigint not null comment 'boss id',
+   hit_index            int not null comment '第几刀',
    done                 bool not null comment '是否出刀',
    demage               int not null comment '伤害',
    score                int not null comment '分数',
@@ -245,6 +253,39 @@ create index idx_boss on bl_hit
 );
 
 /*==============================================================*/
+/* Table: bl_player_battle_day                                  */
+/*==============================================================*/
+create table bl_player_battle_day
+(
+   id                   bigint not null comment '主键',
+   player_id            bigint not null comment '玩家id',
+   player_name          varchar(64) not null comment '玩家名称',
+   battle_id            bigint not null comment '公会战id，冗余字段',
+   day                  int not null comment '天',
+   hit_whole            int not null comment '完整刀',
+   hit_tail             int not null comment '尾刀',
+   hit_compensate       int not null comment '补偿刀',
+   sl                   bool not null comment 'SL',
+   create_time          timestamp not null comment '创建时间',
+   modify_time          timestamp comment '修改时间',
+   version              int not null comment '版本号'
+);
+
+alter table bl_player_battle_day comment '玩家会战天数据';
+
+alter table bl_player_battle_day
+   add primary key (id);
+
+/*==============================================================*/
+/* Index: idx_player_day                                        */
+/*==============================================================*/
+create index idx_player_day on bl_player_battle_day
+(
+   player_id,
+   day
+);
+
+/*==============================================================*/
 /* Table: bl_player_score                                       */
 /*==============================================================*/
 create table bl_player_score
@@ -253,36 +294,17 @@ create table bl_player_score
    player_id            bigint not null comment '玩家id',
    player_name          varchar(64) not null comment '玩家名称',
    battle_id            bigint not null comment '公会战id',
-   hit_whole            int not null comment '完整刀次数',
-   hit_tail             int not null comment '尾刀次数',
-   hit_compensate       int not null comment '补偿刀次数',
-   sl                   bool not null comment '是否SL',
    score                int not null comment '分数',
    demage               int not null comment '伤害',
    create_time          timestamp not null comment '创建时间',
-   create_by            bigint not null comment '创建用户Id',
-   create_name          varchar(32) not null comment '创建者用户名',
-   create_ip            varchar(128) not null comment '创建者Ip',
    modify_time          timestamp comment '修改时间',
-   modify_by            bigint comment '修改用户Id',
-   modify_name          varchar(32) comment '修改用户名称',
-   modify_ip            varchar(128) comment '修改的Ip',
-   version              int not null comment '版本号',
-   del                  bool not null comment '是否删除'
+   version              int not null comment '版本号'
 );
 
 alter table bl_player_score comment '玩家分数';
 
 alter table bl_player_score
    add primary key (id);
-
-/*==============================================================*/
-/* Index: idx_del                                               */
-/*==============================================================*/
-create index idx_del on bl_player_score
-(
-   del
-);
 
 /*==============================================================*/
 /* Index: idx_battle_player                                     */
@@ -300,6 +322,7 @@ create table bl_union
 (
    id                   bigint not null comment '主键',
    name                 varchar(64) not null comment '昵称',
+   battle_id            bigint not null comment '公会战Id',
    create_time          timestamp not null comment '创建时间',
    create_by            bigint not null comment '创建用户Id',
    create_name          varchar(32) not null comment '创建者用户名',
@@ -334,33 +357,20 @@ create table bl_union_score
    union_id             bigint not null comment '公会id',
    union_name           varchar(64) not null comment '公会名称',
    battle_id            bigint not null comment '公会战id',
+   year                 int not null comment '公会年',
+   constellation        tinyint not null comment '星座',
    round                int not null comment '第几轮',
    boss                 int not null comment '第几个boss',
    score                int not null comment '分数',
    create_time          timestamp not null comment '创建时间',
-   create_by            bigint not null comment '创建用户Id',
-   create_name          varchar(32) not null comment '创建者用户名',
-   create_ip            varchar(128) not null comment '创建者Ip',
    modify_time          timestamp comment '修改时间',
-   modify_by            bigint comment '修改用户Id',
-   modify_name          varchar(32) comment '修改用户名称',
-   modify_ip            varchar(128) comment '修改的Ip',
-   version              int not null comment '版本号',
-   del                  bool not null comment '是否删除'
+   version              int not null comment '版本号'
 );
 
 alter table bl_union_score comment '公会分数';
 
 alter table bl_union_score
    add primary key (id);
-
-/*==============================================================*/
-/* Index: idx_del                                               */
-/*==============================================================*/
-create index idx_del on bl_union_score
-(
-   del
-);
 
 /*==============================================================*/
 /* Index: idx_union                                             */
@@ -385,6 +395,7 @@ create table bl_user
 (
    id                   bigint not null comment '主键',
    nick_name            varchar(64) not null comment '昵称',
+   union_id             bigint not null comment '公会Id',
    create_time          timestamp not null comment '创建时间',
    create_by            bigint not null comment '创建用户Id',
    create_name          varchar(32) not null comment '创建者用户名',
