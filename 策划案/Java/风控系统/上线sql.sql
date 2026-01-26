@@ -112,6 +112,10 @@ COMMENT ON COLUMN rc_rule_def_ver.select_time IS "版本被选择时间";
 ALTER TABLE rc_rule_call_log ADD handle_user_id bigint(20) null;
 COMMENT ON COLUMN rc_rule_call_log.handle_user_id IS "处理人"
 
+
+
+
+
 /*****************************20260105****************************/
 
 ALTER TABLE rc_rule_call_log ADD excute_time bigint(20) null;
@@ -121,11 +125,6 @@ ALTER TABLE rc_rule_call_log ADD handle_msg varchar(256) null;
 COMMENT ON COLUMN rc_rule_call_log.handle_msg IS "处理信息";
 
 
-drop index idx_rule_ver_id on rc_rule_ver_hit;
-
-drop index idx_rule_id on rc_rule_ver_hit;
-
-drop table if exists rc_rule_ver_hit;
 
 /*==============================================================*/
 /* Table: rc_rule_ver_hit                                       */
@@ -136,10 +135,12 @@ create table rc_rule_ver_hit
    rule_id              int8 not null comment '规则Id',
    rule_code            char(32) not null comment '规则Code',
    rule_ver_id          int8 not null comment '规则版本Id',
-   no_lv                int8 not null default 0 comment '未告警数',
-   low_lv               int8 not null default 0 comment '低告警数',
-   medium_lv            int8 not null default 0 comment '中告警数',
-   high_lv              int8 not null default 0 comment '高告警数',
+   rule_ver_code        char(32) not null comment '规则版本号',
+   total_times          int8 not null default 0 comment '未告警数',
+   no_lv_times          int8 not null default 0 comment '未告警数',
+   low_lv_times         int8 not null default 0 comment '低告警数',
+   medium_lv_times      int8 not null default 0 comment '中告警数',
+   high_lv_times        int8 not null default 0 comment '高告警数',
    create_time          datetime not null comment '创建的时间',
    update_time          datetime comment '修改时间',
    primary key (id)
@@ -163,3 +164,8 @@ create index idx_rule_ver_id on rc_rule_ver_hit
    rule_ver_id
 );
 
+ALTER TABLE rc_rule_call_figure_log ADD rule_ver_code char(32) null;
+COMMENT ON COLUMN rc_rule_call_figure_log.rule_ver_code IS "规则版本";
+
+ALTER TABLE rc_rule_call_log ADD rule_ver_code char(32) null;
+COMMENT ON COLUMN rc_rule_call_log.rule_ver_code IS "规则版本";
