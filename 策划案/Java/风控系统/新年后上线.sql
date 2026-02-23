@@ -1,3 +1,5 @@
+drop table if exists sys_file;
+
 create table sys_file
 (
    id                   bigint(20) not null comment '主键ID，雪花算法',
@@ -32,6 +34,8 @@ create table sys_file_group
    UNIQUE index uidx_code(code)
 )
 
+drop table if exists sys_rel_file_group;
+
 create table sys_rel_file_group
 (
    id                   bigint(20) not null comment '主键ID，雪花算法',
@@ -41,7 +45,6 @@ create table sys_rel_file_group
    name                 varchar(64) null comment '文件名,冗余字段',
    suffix               varchar(10) null comment '文件后缀,冗余字段',
    description          varchar(1024) null comment '文件描述,冗余字段',
-   path                 varchar(2048) not null comment '文件路径,冗余字段',
    create_user_id       bigint(20) not null comment '创建者用户Id',
    create_user          varchar(64) not null comment '创建者用户昵称',
    create_time          datetime not null comment '创建的时间',
