@@ -6,7 +6,7 @@ create table sys_file
    path                 varchar(2048) not null comment '文件路径',
    uuid                 char(36) not null comment '文件的uuid',
    suffix               varchar(10) null comment '文件后缀',
-   mine_type            varchar(32) null comment '文件类型',
+   mine_type            varchar(256) null comment '文件类型',
    fp1                  bigint(20) not null comment '指纹1',
    fp2                  bigint(20) not null comment '指纹2',
    create_user_id       bigint(20) not null comment '创建者用户Id',
@@ -102,9 +102,12 @@ CREATE TABLE jh_rule_task(
    id bigint NOT NULL COMMENT '主键ID，自增',
    system_id bigint NOT NULL COMMENT '稽核系统Id',
    scene_id bigint NOT NULL COMMENT '稽核场景Id',
+   event_id bigint NOT NULL COMMENT '稽核事件Id',
    jh_rule_id bigint NOT NULL COMMENT '稽核任务Id',
+   jh_rule_ver_id bigint NOT NULL COMMENT '稽核任务版本Id',
    code char(32) NOT NULL COMMENT '稽核任务code',
    name varchar(64) NULL COMMENT '稽核任务名字',
+   description varchar(256) COMMENT '稽核任务描述',
    cur_version_id bigint NOT NULL COMMENT '当前执行Id',
    version_seq int NOT NULL COMMENT '版本序号',
    version_code varchar(10) NOT NULL COMMENT '当前版本号',
@@ -122,7 +125,7 @@ CREATE TABLE jh_rule_task(
    KEY idx_code(code),
    KEY idx_jh_rule_id(jh_rule_id),
    KEY idx_system_id(system_id),
-   KEY idx_scene_id(scene_id)
+   KEY idx_event_id(event_id)
 ) COMMENT='稽核任务';
 
 
@@ -135,11 +138,12 @@ CREATE TABLE jh_rule_task_version(
    version_code varchar(10) NOT NULL COMMENT '版本code',
 
    analysis_status tinyint(4) NOT NULL COMMENT '解析进度、1、文件准备中、2文件解析、3计算中、4解析完成、5结果报告生成、6结果报告生成完成、-1解析失败',
-   file_group_id bigint NOT NULL COMMENT '文件组Id',
-   execute_time_beg datetime NOT NULL COMMENT '执行开始时间',
-   execute_time_end datetime NOT NULL COMMENT '执行结束时间',
+   file_group_id bigint NOT NULL default 0 COMMENT '文件组Id',
+   report_file_group_id bigint NOT NULL default 0 COMMENT '报告文件组Id',
+   execute_time_beg datetime  NULL COMMENT '执行开始时间',
+   execute_time_end datetime  NULL COMMENT '执行结束时间',
 
-   data_num int not null default 0 comment '数据总量',
+   total_data_num int not null default 0 comment '数据总量',
    handled_data_num int not null default 0 comment '已处理数据总量',
    err_data_num int not null default 0 comment '错误据总量',
 
@@ -169,6 +173,7 @@ CREATE TABLE jh_rule_task_version_file_status(
    task_id bigint NOT NULL COMMENT '任务Id',
    task_ver_id bigint NOT NULL COMMENT '任务执行Id',
    file_attach_id bigint NOT NULL COMMENT '文件关联Id',
+   report_file_attach_id bigint NOT NULL default 0 COMMENT '报告文件关联Id',
 
    analysis_status tinyint(4) NOT NULL COMMENT '解析进度、1、文件准备中、2文件解析、3计算中、4解析完成、5结果报告生成、6结果报告生成完成、-1解析失败',
 
@@ -195,6 +200,33 @@ CREATE TABLE jh_rule_task_version_file_status(
 ) COMMENT='稽核任务版本文件状态';
 
 
+drop table if exists jh_rule_task_version_file_param_config;
+CREATE TABLE jh_rule_task_version_file_param_config(
+   id bigint NOT NULL COMMENT '主键ID，自增',
+
+   task_id bigint NOT NULL COMMENT '任务Id',
+   task_ver_id bigint NOT NULL COMMENT '任务执行Id',
+   file_status_id bigint NOT NULL COMMENT '任务文件状态Id',
+
+   order_idx int NOT NULL DEFAULT 0 COMMENT '排序位，第几列',
+   param_key varchar(50) NOT NULL COMMENT '参数键',
+   param_name varchar(50) NOT NULL COMMENT '参数名',
+   param_type tinyint NOT NULL COMMENT '参数类型',
+   default_val varchar(64) NOT NULL COMMENT '默认值',
+
+
+   create_user_id bigint NOT NULL COMMENT '创建用户Id',
+   create_user varchar(64) NOT NULL COMMENT '创建者用户昵称',
+   create_time datetime NOT NULL COMMENT '创建时间',
+   update_user_id bigint DEFAULT NULL COMMENT '修改者用户Id',
+   update_user varchar(64) DEFAULT NULL COMMENT '修改者用户昵称',
+   update_time datetime DEFAULT NULL COMMENT '修改时间',
+   version integer NOT NULL COMMENT '乐观锁',
+   PRIMARY KEY (id),
+   KEY idx_file_status_id(file_status_id)
+) COMMENT='稽核任务版本文件参数配置';
+
+
 
 drop table if exists jh_rule_call_log;
 CREATE TABLE `jh_rule_call_log` (
@@ -207,11 +239,10 @@ CREATE TABLE `jh_rule_call_log` (
   `rule_code` char(32) NOT NULL COMMENT '规则编码',
   `rule_name` varchar(64) DEFAULT NULL COMMENT '规则名称',
   `rule_ver_id` bigint NOT NULL COMMENT '规则版本ID',
-  `rule_ver_code` bigint NOT NULL COMMENT '规则版本code',
+  `rule_ver_code` char(12) NOT NULL COMMENT '规则版本code',
   `call_time` bigint NOT NULL COMMENT '调用时间戳',
   `trigger_lv` int NOT NULL COMMENT '触发等级',
   `system_id` bigint NOT NULL COMMENT '稽核系统Id',
-  `scene_id` bigint NOT NULL COMMENT '稽核场景Id',
   `err_msg` varchar(1024) DEFAULT NULL COMMENT '错误信息',
   `success` tinyint DEFAULT NULL COMMENT '是否成功',
   `is_handled` tinyint NOT NULL DEFAULT 0 COMMENT '是否已处理',
@@ -245,11 +276,10 @@ CREATE TABLE `jh_rule_call_log_none_hit` (
   `rule_code` char(32) NOT NULL COMMENT '规则编码',
   `rule_name` varchar(64) DEFAULT NULL COMMENT '规则名称',
   `rule_ver_id` bigint NOT NULL COMMENT '规则版本ID',
-  `rule_ver_code` bigint NOT NULL COMMENT '规则版本code',
+  `rule_ver_code` char(12) NOT NULL COMMENT '规则版本code',
   `call_time` bigint NOT NULL COMMENT '调用时间戳',
   `trigger_lv` int NOT NULL COMMENT '触发等级',
   `system_id` bigint NOT NULL COMMENT '稽核系统Id',
-  `scene_id` bigint NOT NULL COMMENT '稽核场景Id',
   `err_msg` varchar(1024) DEFAULT NULL COMMENT '错误信息',
   `success` tinyint DEFAULT NULL COMMENT '是否成功',
   `is_handled` tinyint NOT NULL DEFAULT 0 COMMENT '是否已处理',
@@ -273,13 +303,10 @@ CREATE TABLE `jh_rule_call_log_none_hit` (
 
 
 
-
-
-
 drop table if exists jh_rule_call_log_param;
 CREATE TABLE `jh_rule_call_log_param` (
   `id` bigint NOT NULL COMMENT '主键ID，自增',
-  `task_var_id` bigint NOT NULL COMMENT '稽核任务版本Id',
+  `task_ver_id` bigint NOT NULL COMMENT '稽核任务版本Id',
   `jh_log_id` bigint NOT NULL COMMENT '稽核规则日志Id',
   `key` varchar(64) NOT NULL COMMENT '参数',
   `name` varchar(256) NOT NULL COMMENT '名称',
@@ -292,7 +319,7 @@ CREATE TABLE `jh_rule_call_log_param` (
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `version` int NOT NULL COMMENT '乐观锁',
   PRIMARY KEY (`id`),
-  KEY idx_task_var_id(task_var_id),
+  KEY idx_task_var_id(task_ver_id),
   KEY idx_jh_log_id(jh_log_id)
 ) COMMENT='稽核日志-参数';
 
@@ -304,7 +331,7 @@ CREATE TABLE `jh_rule_call_figure_log` (
   `rule_id` bigint NOT NULL COMMENT '规则ID',
   `rule_code` char(32) NOT NULL COMMENT '规则编码',
   `rule_ver_id` bigint NOT NULL COMMENT '规则版本ID',
-  `rule_ver_code` bigint NOT NULL COMMENT '规则版本code',
+  `rule_ver_code` char(12) NOT NULL COMMENT '规则版本code',
   `task_id` bigint NOT NULL COMMENT '任务Id',
   `task_ver_id` bigint NOT NULL COMMENT '任务执行Id',
   `rule_call_log_id` bigint NOT NULL COMMENT '规则调用Id',
@@ -329,3 +356,26 @@ CREATE TABLE `jh_rule_call_figure_log` (
 ) COMMENT='指标规则调用指标日志';
 
 
+SELECT
+    schemaname,
+    tablename,
+    indexname,
+    indexdef
+FROM pg_indexes
+where tablename = "rc_figure" and schemaname = "risk_engine_platform";
+
+drop index risk_engine_platform.uidx_source_field;
+
+create unique index uidx_rc_figure_field 
+on rc_figure(source_id,source_field,param_dim_key,system_id);
+
+
+alter table rc_interface_def ALTER COLUMN url DROP NOT NULL;
+
+delete from rc_interface_def;
+delete from rc figure where figure_type = 2;
+
+
+alter table rc_interface_def ADD COLUMN third_code char(32) null COMMENT "第三方code，只在第三方转发调用时才有效";
+
+alter table jh_rule_task ADD COLUMN description varchar(256) null COMMENT "稽核任务描述";
