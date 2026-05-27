@@ -1,0 +1,82 @@
+{
+	"code": "reqTime",
+	"keyPrefix": "reqTime",
+	"name": "请求次数",
+	"description": "用户一段时间的请求次数",
+	"keyParam": [
+		{
+			"name": "手机号",
+			"params":[
+				{
+					"key": "phone",
+					"keyPath": "mobile",
+					"name": "手机号",
+					"sType": "PARAM"
+				}
+			]
+		}
+	],
+	"response":[
+		{
+			"name": "1分钟请求数",
+			"key": "i1m",
+			"keyPath": "i1m",
+			"type" : "INTEGER",
+			"dua" : 60,
+			"defaultVal": 0
+		},
+		{
+			"name": "10分钟请求数",
+			"key": "i10m",
+			"keyPath": "i10m",
+			"type" : "INTEGER",
+			"dua" : 600,
+			"defaultVal": 0
+		}
+	]
+}
+
+
+
+{
+	"code": "linkedIP",
+	"keyPrefix": "linkedIP",
+	"name": "1小时内IP绑定手机数",
+	"description": "1小时内IP绑定手机数",
+	"keyParam": [
+		{
+			"name": "ip",
+			"code": "ip",
+			"params":[
+				{
+					"key": "ip",
+					"keyPath": "ip",
+					"name": "手机号",
+					"sType": "PARAM"
+				}
+			]
+		}
+		{
+			"name": "手机号",
+			"code": "phone",
+			"params":[
+				{
+					"key": "phone",
+					"keyPath": "mobile",
+					"name": "手机号",
+					"sType": "PARAM"
+				}
+			]
+		}
+	],
+	"response":[
+		{
+			"name": "1小时内IP关联手机数",
+			"key": "phoneCnt1h",
+			"keyPath": "phoneCnt1h",
+			"type" : "INTEGER",
+			"dua" : 3600,
+			"defaultVal": 0
+		}
+	]
+}

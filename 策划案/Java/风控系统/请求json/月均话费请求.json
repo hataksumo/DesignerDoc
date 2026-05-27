@@ -1,0 +1,44 @@
+{
+	"code": "yue-jun-hua-fei",
+	"name": "月均话费接口",
+	"method": "INNER_THIRD",
+	"dua": 864000,
+	"bodyParam": [
+		{
+			"sType": "USER_DEFINE",
+			"paramType": "STRING",
+			"key": "interfaceCode",
+			"keyPath":"interfaceCode",
+			"name": "三方接口Code",
+			"description": "三方接口Code,和孙云云对接",
+			"val": "ngcrmpf-queryMonthlyAvgBillInfo"
+		},
+		{
+			"sType": "PARAM",
+			"paramType": "STRING",
+			"key": "userMobile",
+			"keyPath": "contentMap.userMobile",
+			"sourceKeyPath": "mobile",
+			"name": "电话号",
+			"description": "电话号码"
+		}
+	],
+	"response": [
+		{
+			"key" : "avgSixMonthFee",
+			"keyPath" : "avgSixMonthFee",
+			"name": "6个月月均话费",
+			"description": "6个月月均话费",
+			"type": "NUMBER",
+			"defaultVal" : 0.0
+		},
+		{
+			"key" : "avgThreeMonthFee",
+			"keyPath" : "avgThreeMonthFee",
+			"name": "3个月月均话费",
+			"description": "个月月均话费",
+			"type": "NUMBER",
+			"defaultVal" : 0.0
+		}
+	]
+}

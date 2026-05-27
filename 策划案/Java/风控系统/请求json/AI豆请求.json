@@ -1,0 +1,109 @@
+## 接口数据源
+
+{
+	"code": "ai-dou",
+	"name": "AI豆接口",
+	"method": "INNER_THIRD",
+	"dua": 0,
+	"bodyParam": [
+		{
+			"sType": "USER_DEFINE",
+			"paramType": "STRING",
+			"key": "interfaceCode",
+			"keyPath":"interfaceCode",
+			"name": "三方接口Code",
+			"description": "三方接口Code,和孙云云对接",
+			"val": "payplatform-userconsumequery-ag"
+		},
+		{
+			"sType": "PARAM",
+			"paramType": "STRING",
+			"key": "provCode",
+			"keyPath": "contentMap.provCode",
+			"sourceKeyPath": "provinceInfoDto.provinceCode",
+			"name": "省份Code",
+			"description": "省份Code"
+		},
+		{
+			"sType": "PARAM",
+			"paramType": "STRING",
+			"key": "regionCode",
+			"keyPath": "contentMap.regionCode",
+			"sourceKeyPath": "provinceInfoDto.cityCode",
+			"name": "地区Code",
+			"description": "地区Code"
+		},
+		{
+			"sType": "PARAM",
+			"paramType": "STRING",
+			"key": "channelCode",
+			"keyPath": "contentMap.channelCode",
+			"sourceKeyPath": "contentMap.channelCode",
+			"name": "渠道Code",
+			"description": "渠道Code"
+		},
+		{
+			"sType": "PARAM",
+			"paramType": "STRING",
+			"key": "phoneNum",
+			"keyPath": "contentMap.phoneNum",
+			"sourceKeyPath": "mobile",
+			"name": "电话号",
+			"description": "电话号"
+		},
+		{
+			"sType": "PARAM",
+			"paramType": "STRING",
+			"key": "currentBeanAmount",
+			"keyPath": "contentMap.currentBeanAmount",
+			"sourceKeyPath": "currentBeanAmount",
+			"name": "当前订单使用",
+			"description": "当前订单使用"
+		}
+	],
+	"response":[
+		{
+		   "key": "todayUsed",
+		   "keyPath": "todayUsed",
+		   "name": "AI豆总消耗",
+		   "description": "AI豆总消耗",
+		   "type": "INTEGER",
+		   "defaultVal": 0
+		},
+		{
+		   "key": "thisMonthUsed",
+		   "keyPath": "thisMonthUsed",
+		   "name": "AI豆当月消耗",
+		   "description": "AI豆当月消耗",
+		   "type": "INTEGER",
+		   "defaultVal": 0
+		}
+	]
+}
+
+
+
+
+## 指标创建
+
+{
+	"figureType": "IT",
+	"sourceCode": "ai-dou",
+	"sourceId": 391046167931674624,
+	"sourceField": "todayUsed",
+	"name": "AI豆总消耗",
+	"description": "AI豆总消耗",
+	"systemId": 10,
+	"tag": "rule-excure-test"
+}
+
+{
+	"figureType": "IT",
+	"sourceCode": "ai-dou",
+	"sourceId": 391046167931674624,
+	"sourceField": "thisMonthUsed",
+	"name": "AI豆当月消耗",
+	"description": "AI豆当月消耗",
+	"systemId": 10,
+	"tag": "rule-excure-test"
+}

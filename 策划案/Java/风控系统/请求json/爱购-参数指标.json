@@ -1,0 +1,134 @@
+# 系统层级
+
+{
+	"sceneEventId": 1867502050691096581,
+	"sceneEventLv": 1,
+	"response": [
+		{
+			"key" : "mobile",
+			"name" : "手机号",
+			"description": "手机号",
+			"keyPath": "mobile",
+			"type": "STRING",
+			"defaultVal": "null"
+		},
+		{
+			"key" : "ip",
+			"name" : "ip",
+			"description": "ip",
+			"keyPath": "ip",
+			"type": "STRING",
+			"defaultVal": "127.0.0.1"
+		},
+		{
+			"key" : "reqDate",
+			"name" : "请求时间",
+			"description": "请求时间",
+			"keyPath": "reqDate",
+			"type": "DATE_TIME",
+			"defaultVal": "1900-01-01 00：00：00"
+		},
+		{
+			"key" : "cityCode",
+			"name" : "城市Code",
+			"description": "城市Code",
+			"keyPath": "provinceInfoDto.cityCode",
+			"type": "STRING",
+			"defaultVal": "001001"
+		},
+		{
+			"key" : "provinceCode",
+			"name" : "省份Code",
+			"description": "省份Code",
+			"keyPath": "provinceInfoDto.provinceCode",
+			"type": "PROV",
+			"defaultVal": "001"
+		},
+		{
+			"key" : "cityName",
+			"name" : "城市名称",
+			"description": "城市名称",
+			"keyPath": "provinceInfoDto.cityName",
+			"type": "STRING",
+			"defaultVal": "未命名城市"
+		},
+		{
+			"key" : "provinceName",
+			"name" : "省份名称",
+			"description": "省份名称",
+			"keyPath": "provinceInfoDto.provinceName",
+			"type": "STRING",
+			"defaultVal": "未命名省份"
+		}
+	]
+	
+}
+
+# 场景层级
+
+
+{
+	"sceneEventId": 400540850966663168,
+	"sceneEventLv": 2,
+	"response": [
+		{
+			"key" : "orderPrice",
+			"name" : "订单应付(元)",
+			"description": "订单应付(元)",
+			"keyPath": "orderPrice",
+			"type": "NUMBER",
+			"defaultVal": 0.0
+		},
+		{
+			"key" : "currentBeanAmount",
+			"name" : "智豆数量",
+			"description": "当前订单使用数智豆数量（单位是个，1个=0.01元）",
+			"keyPath": "orderPrice",
+			"type": "INTEGER",
+			"defaultVal": 0
+		},
+		{
+			"key" : "skuType",
+			"name" : "sku类型",
+			"description": "sku类型",
+			"keyPath": "skuType",
+			"type": "ENUM",
+			"enumCode": "SKU",
+			"defaultVal": "0"
+		},
+		{
+			"key" : "skuTypeList",
+			"name" : "sku类型数组",
+			"description": "sku类型数组",
+			"keyPath": "skuTypeList",
+			"type": "STRING_ARRAY",
+			"enumCode": "SKU",
+			"defaultVal": []
+		},
+		{
+			"key" : "rechargeDailyTotal",
+			"name" : "当日话费",
+			"description": "号码商城站内当日话费支付总金额（元）",
+			"keyPath": "rechargeDailyTotal",
+			"type": "NUMBER",
+			"defaultVal": 0
+		},
+		{
+			"key" : "rechargeMonthlyTotal",
+			"name" : "当月话费",
+			"description": "号码商城站内当月话费支付总金额（元）",
+			"keyPath": "rechargeMonthlyTotal",
+			"type": "NUMBER",
+			"defaultVal": 0
+		},
+		{
+			"key" : "itemNameList",
+			"name" : "道具名称数组",
+			"description": "道具名称数组",
+			"keyPath": "itemName",
+			"type": "STRING_ARRAY",
+			"defaultVal": []
+		}
+	]
+}
+

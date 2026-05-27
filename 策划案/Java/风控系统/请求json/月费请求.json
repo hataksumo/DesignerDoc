@@ -1,0 +1,79 @@
+{
+	"code": "yue-fei",
+	"name": "月费接口",
+	"method": "INNER_THIRD",
+	"thirdCode": "ngcrmpf-querySubscribeInfo",
+	"dua": 86400,
+	"bodyParam": [
+		{
+			"sType": "USER_DEFINE",
+			"paramType": "STRING",
+			"key": "interfaceCode",
+			"keyPath":"interfaceCode",
+			"name": "三方接口Code",
+			"description": "三方接口Code,和孙云云对接",
+			"val": "ngcrmpf-querySubscribeInfo"
+		},
+		{
+			"sType": "PARAM",
+			"paramType": "STRING",
+			"key": "userMobile",
+			"keyPath": "contentMap.userMobile",
+			"sourceKeyPath": "mobile",
+			"name": "电话号",
+			"description": "电话号码"
+		},
+		{
+			"sType": "USER_DEFINE",
+			"paramType": "STRING",
+			"key": "queryType",
+			"keyPath": "contentMap.queryType",
+			"val": "01",
+			"name": "查询类型",
+			"description": "查询类型"
+		},
+		{
+			"sType": "USER_DEFINE",
+			"paramType": "STRING",
+			"key": "queryMode",
+			"keyPath": "contentMap.queryMode",
+			"val": "0",
+			"name": "查询模式",
+			"description": "查询模式"
+		}
+	],
+	"response": [
+		{
+			"key" : "offer",
+			"keyPath" : "offer",
+			"name": "月费",
+			"description": "月费",
+			"type": "INTEGER",
+			"defaultVal" : 0
+		},
+		{
+			"key" : "highOffer",
+			"keyPath" : "highOffer",
+			"name": "是否高月费",
+			"description": "是否高月费",
+			"type": "BOOLEAN",
+			"defaultVal" : false
+		},
+		{
+			"key" : "normalOffer",
+			"keyPath" : "normalOffer",
+			"name": "是否中月费",
+			"description": "是否中月费",
+			"type": "BOOLEAN",
+			"defaultVal" : false
+		},
+		{
+			"key" : "lowOffer",
+			"keyPath" : "lowOffer",
+			"name": "是否低月费",
+			"description": "是否低月费",
+			"type": "BOOLEAN",
+			"defaultVal" : false
+		}
+	]
+}
