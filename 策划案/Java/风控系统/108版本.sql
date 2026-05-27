@@ -71,10 +71,6 @@ create table rc_cal_figure_receive_log
 (
    id                   bigint(20) not null comment '主键ID，雪花算法',
    request_id           bigint(20) not null comment '请求Id',
-   event_id             bigint(20) not null comment '事件Id',
-   event_code           char(32) not null comment '事件code',
-   cal_figure_def_id    bigint(20) not null comment '营服数据源Id',
-   cal_figure_def_code  char(32) not null comment '营服数据源Code',
    receive_time         datetime not null comment '触发时间',
    response             text null comment '返回结果',
 
