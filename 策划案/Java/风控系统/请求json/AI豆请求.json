@@ -27,6 +27,15 @@
 		{
 			"sType": "PARAM",
 			"paramType": "STRING",
+			"key": "provCodeHead",
+			"keyPath": "provCode",
+			"sourceKeyPath": "provinceInfoDto.provinceCode",
+			"name": "省份Code",
+			"description": "省份Code"
+		},
+		{
+			"sType": "PARAM",
+			"paramType": "STRING",
 			"key": "regionCode",
 			"keyPath": "contentMap.regionCode",
 			"sourceKeyPath": "provinceInfoDto.cityCode",

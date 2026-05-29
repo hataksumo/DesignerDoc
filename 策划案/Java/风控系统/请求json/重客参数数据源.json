@@ -1,0 +1,54 @@
+{
+	"sceneEventId": "",
+	"sceneEventLv": 3,
+	"response":[
+		{
+			"key": "account_tel_query_cnt",
+			"name": "账号电话查询数量",
+			"description": "账号电话查询数量",
+			"keyPath": "account_tel_query_cnt",
+			"type": "INTEGER",
+			"defaultVal": 0
+		},
+		{
+			"key": "chg_telnum",
+			"name": "电话号码",
+			"description": "电话号码",
+			"keyPath": "chg_telnum",
+			"type": "STRING",
+			"defaultVal": "114514"
+		},
+		{
+			"key": "chg_staff_id",
+			"name": "员工Id",
+			"description": "员工Id",
+			"keyPath": "chg_staff_id",
+			"type": "STRING",
+			"defaultVal": "ZK03306"
+		},
+		{
+			"key": "lg_id",
+			"name": "日志Id",
+			"description": "日志Id",
+			"keyPath": "lg_id",
+			"type": "STRING",
+			"defaultVal": "0"
+		},
+		{
+			"key": "prov_code",
+			"name": "省份code",
+			"description": "省份code",
+			"keyPath": "prov_code",
+			"type": "STRING",
+			"defaultVal": "00"
+		},
+		{
+			"key": "statis_date",
+			"name": "数据日期",
+			"description": "数据日期",
+			"keyPath": "statis_date",
+			"type": "STRING",
+			"defaultVal": "2020-01-01"
+		}
+	]
+}
