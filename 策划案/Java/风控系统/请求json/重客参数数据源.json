@@ -52,3 +52,57 @@
 		}
 	]
 }
+
+
+{
+	"tableName": "t_acpt_num_chg_log_day",
+	"timeField": "statis_date",
+	"timeBegin": "2026-05-28 00:00:00",
+	"timeEnd": "2026-05-28 23:59:59",
+	"selectFields":[
+		{
+			"field": "account_tel_query_cnt",
+			"fieldAs": "account_tel_query_cnt",
+			"fieldName": "账号电话查询数量",
+			"fieldType": "INTEGER",
+			"defaultVal": 0
+		},
+		{
+			"field": "chg_telnum",
+			"fieldName": "电话号码",
+			"fieldAs": "chg_telnum",
+			"fieldType": "STRING",
+			"defaultVal": "114514"
+		},
+		{
+			"field": "chg_staff_id",
+			"fieldName": "员工Id",
+			"fieldAs": "chg_staff_id",
+			"fieldType": "STRING",
+			"defaultVal": "ZK03306"
+		},
+		{
+			"field": "lg_id",
+			"fieldName": "日志Id",
+			"description": "日志Id",
+			"fieldAs": "lg_id",
+			"fieldType": "STRING",
+			"defaultVal": "0"
+		},
+		{
+			"field": "prov_code",
+			"fieldName": "省份code",
+			"description": "省份code",
+			"fieldAs": "prov_code",
+			"fieldType": "STRING",
+			"defaultVal": "00"
+		},
+		{
+			"field": "statis_date",
+			"fieldName": "数据日期",
+			"fieldAs": "statis_date",
+			"fieldType": "STRING",
+			"defaultVal": "2020-01-01"
+		}
+	]
+}
