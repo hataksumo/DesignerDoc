@@ -6,5 +6,5 @@ ALTER TABLE jh_rule_task_version ADD COLUMN time_begin datetime null comment "�
 ALTER TABLE jh_rule_task_version ADD COLUMN time_end datetime null comment "查询时间起始";
 ALTER TABLE jh_rule_task_version ADD COLUMN group_phrase varchar(100) null comment "分组字段";
 ALTER TABLE jh_rule_task_version ADD COLUMN select_fields text null comment "查询字段";
-
-ALTER TABLE jh_rule_task_version ALTER COLUMN file_group_id DROP NOT NULL;
+ALTER TABLE jh_rule_task_version ALTER COLUMN file_group_id DROP not null;
+alter table jh_rule_task_version_file_status alter column file_attach_id drop not null;
