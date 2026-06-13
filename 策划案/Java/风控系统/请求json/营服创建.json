@@ -77,6 +77,22 @@
 			"type" : "INTEGER",
 			"dua" : 3600,
 			"defaultVal": 0
+		},
+		{
+			"name": "1天内IP关联手机数",
+			"key": "phoneCnt1d",
+			"keyPath": "phoneCnt1d",
+			"type" : "INTEGER",
+			"dua" : 86400,
+			"defaultVal": 0
+		},
+		{
+			"name": "7天内IP关联手机数",
+			"key": "phoneCnt7d",
+			"keyPath": "phoneCnt7d",
+			"type" : "INTEGER",
+			"dua" : 604800,
+			"defaultVal": 0
 		}
 	]
 }

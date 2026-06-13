@@ -106,3 +106,589 @@
 		}
 	]
 }
+
+
+
+# 员工每日账号查询次数
+
+CREATE TABLE `risk_engine_platform`.`t_acpt_staff_query_day` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `statis_date` date DEFAULT NULL COMMENT '统计期',
+  `prov_code` character varying(10) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '分省编码',
+  `lg_id` text COLLATE `ci_x_icu` DEFAULT NULL COMMENT '日志id',
+  `chg_staff_id` character varying(40) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '受理工id',
+  `staff_daily_query_cnt` integer DEFAULT NULL COMMENT '1天同1个账号查询次数',
+  CONSTRAINT `t_acpt_staff_query_day_pkey` PRIMARY KEY (`id`),
+  KEY `idx_statis_date_idx6` USING `btree` (`statis_date` NULLS FIRST),
+  KEY `idx_date_prov_staff` USING `btree` (`statis_date` NULLS FIRST, `prov_code` NULLS FIRST, `chg_staff_id` NULLS FIRST)
+) COMMENT '员工账号每日查询次数统计表';
+
+{
+	"sceneEventId": "",
+	"sceneEventLv": 3,
+	"response":[
+		{
+			"key": "staff_daily_query_cnt",
+			"name": "1天同一账号查询次数",
+			"description": "1天同一账号查询次数",
+			"keyPath": "staff_daily_query_cnt",
+			"type": "INTEGER",
+			"defaultVal": 0
+		},
+		{
+			"key": "statis_date",
+			"name": "日期",
+			"description": "日期",
+			"keyPath": "statis_date",
+			"type": "STRING",
+			"defaultVal": "2000-01-01 00:00:00"
+		},
+		{
+			"key": "prov_code",
+			"name": "省份编码",
+			"description": "省份编码",
+			"keyPath": "prov_code",
+			"type": "STRING",
+			"defaultVal": null
+		},
+		{
+			"key": "lg_id",
+			"name": "日志Id",
+			"description": "日志Id",
+			"keyPath": "lg_id",
+			"type": "STRING",
+			"defaultVal": null
+		},
+		{
+			"key": "chg_staff_id",
+			"name": "受理工id",
+			"description": "受理工id",
+			"keyPath": "chg_staff_id",
+			"type": "STRING",
+			"defaultVal": null
+		}
+	]
+}
+
+
+{
+  "step1": {
+	  "dataSourceType": "SQL",
+	  "description": "员工账号每日查询次数",
+	  "eventId": 418932790577127424,
+	  "jhRuleId": 2061365274721173505,
+	  "name": "员工账号每日查询次数-20250905",
+	  "sceneId": 418898930816573440,
+	  "systemId": 20
+    },
+  "step2": {
+  	"tableName": "t_acpt_staff_query_day",
+	"timeField": "statis_date",
+	"timeBegin": "2025-09-02 00:00:00",
+	"timeEnd": "2025-09-02 23:59:59",
+  	"selectFields": [
+  		{
+			"field": "staff_daily_query_cnt",
+			"fieldAs": "staff_daily_query_cnt",
+			"fieldName": "1天同一账号查询次数",
+			"fieldType": "INTEGER",
+			"defaultVal": 0
+		},
+		{
+			"field": "chg_staff_id",
+			"fieldName": "员工Id",
+			"fieldAs": "chg_staff_id",
+			"fieldType": "STRING",
+			"defaultVal": "ZK03306"
+		},
+		{
+			"field": "lg_id",
+			"fieldName": "日志Id",
+			"description": "日志Id",
+			"fieldAs": "lg_id",
+			"fieldType": "STRING",
+			"defaultVal": "0"
+		},
+		{
+			"field": "prov_code",
+			"fieldName": "省份code",
+			"description": "省份code",
+			"fieldAs": "prov_code",
+			"fieldType": "STRING",
+			"defaultVal": "00"
+		},
+		{
+			"field": "statis_date",
+			"fieldName": "数据日期",
+			"fieldAs": "statis_date",
+			"fieldType": "STRING",
+			"defaultVal": "2020-01-01"
+		}
+  	]
+  }
+}
+
+
+
+
+
+
+
+
+# 一小时相似号段查询次数统计表
+
+CREATE TABLE `risk_engine_platform`.`t_acpt_num_chg_segment_day` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `statis_date` date DEFAULT NULL COMMENT '统计期',
+  `prov_code` character varying(10) COLLATE "ci_x_icu" DEFAULT NULL COMMENT '分省编码',
+  `lg_id` text COLLATE "ci_x_icu" DEFAULT NULL COMMENT '日志id',
+  `chg_staff_id` character varying(40) COLLATE "ci_x_icu" DEFAULT NULL COMMENT '受理工id',
+  `chg_telnum` character varying(20) COLLATE "ci_x_icu" DEFAULT NULL COMMENT '变更电话号码',
+  `hour_similar_segment_cnt` integer DEFAULT NULL COMMENT '1小时查询相似号段次数',
+  CONSTRAINT `t_acpt_num_chg_segment_day_pkey` PRIMARY KEY (`id`),
+  KEY `idx_statis_date_idx7` USING `btree` (`statis_date` NULLS FIRST),
+  KEY `idx_date_prov_staff_tel_idx1` USING `btree` (`statis_date` NULLS FIRST, `prov_code` NULLS FIRST, `chg_staff_id` NULLS FIRST, `chg_telnum` NULLS FIRST)
+) COMMENT '一小时相似号段查询次数统计表';
+
+
+{
+	"sceneEventId": "",
+	"sceneEventLv": 3,
+	"response":[
+		{
+			"key": "prov_code",
+			"name": "省份编码",
+			"description": "省份编码",
+			"keyPath": "prov_code",
+			"type": "STRING",
+			"defaultVal": null
+		},
+		{
+			"key": "statis_date",
+			"name": "日期",
+			"description": "日期",
+			"keyPath": "statis_date",
+			"type": "STRING",
+			"defaultVal": "2000-01-01 00:00:00"
+		},
+		{
+			"key": "lg_id",
+			"name": "日志Id",
+			"description": "日志Id",
+			"keyPath": "lg_id",
+			"type": "STRING",
+			"defaultVal": null
+		},
+
+		{
+			"key": "chg_staff_id",
+			"name": "受理工id",
+			"description": "受理工id",
+			"keyPath": "chg_staff_id",
+			"type": "STRING",
+			"defaultVal": null
+		},
+
+		{
+			"key": "chg_telnum",
+			"name": "变更电话号码",
+			"description": "变更电话号码",
+			"keyPath": "chg_telnum",
+			"type": "STRING",
+			"defaultVal": null
+		},
+		{
+			"key": "hour_similar_segment_cnt",
+			"name": "1小时查询相似号段次数",
+			"description": "1小时查询相似号段次数",
+			"keyPath": "hour_similar_segment_cnt",
+			"type": "INTEGER",
+			"defaultVal": 0
+		}
+	]
+} 
+
+
+{
+  "step1": {
+	  "dataSourceType": "SQL",
+	  "description": "1小时查询相似号段次数-20260905",
+	  "eventId": 418932622356176896,
+	  "jhRuleId": 2061365854589050881,
+	  "name": "1小时查询相似号段次数_20260905",
+	  "sceneId": 418898930816573440,
+	  "systemId": 20
+    },
+  "step2": {
+  	"tableName": "t_acpt_num_chg_segment_day",
+	"timeField": "statis_date",
+	"timeBegin": "2025-09-05 00:00:00",
+	"timeEnd": "2025-09-05 23:59:59",
+  	"selectFields": [
+  		{
+			"field": "hour_similar_segment_cnt",
+			"fieldAs": "hour_similar_segment_cnt",
+			"fieldName": "1小时查询相似号段次数",
+			"fieldType": "INTEGER",
+			"defaultVal": 0
+		},
+		{
+			"field": "chg_telnum",
+			"fieldName": "电话号码",
+			"fieldAs": "chg_telnum",
+			"fieldType": "STRING",
+			"defaultVal": "114514"
+		},
+		{
+			"field": "chg_staff_id",
+			"fieldName": "员工Id",
+			"fieldAs": "chg_staff_id",
+			"fieldType": "STRING",
+			"defaultVal": "ZK03306"
+		},
+		{
+			"field": "lg_id",
+			"fieldName": "日志Id",
+			"description": "日志Id",
+			"fieldAs": "lg_id",
+			"fieldType": "STRING",
+			"defaultVal": "0"
+		},
+		{
+			"field": "prov_code",
+			"fieldName": "省份code",
+			"description": "省份code",
+			"fieldAs": "prov_code",
+			"fieldType": "STRING",
+			"defaultVal": "00"
+		},
+		{
+			"field": "statis_date",
+			"fieldName": "数据日期",
+			"fieldAs": "statis_date",
+			"fieldType": "STRING",
+			"defaultVal": "2020-01-01"
+		}
+  	]
+  }
+}
+
+
+
+
+# 号码变更每日账号查询次数统计表
+
+CREATE TABLE `risk_engine_platform`.`t_acpt_num_chg_log_day` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `statis_date` date DEFAULT NULL COMMENT '统计期',
+  `prov_code` character varying(10) COLLATE "ci_x_icu" DEFAULT NULL COMMENT '分省编码',
+  `lg_id` text COLLATE "ci_x_icu" DEFAULT NULL COMMENT '日志id',
+  `chg_staff_id` character varying(40) COLLATE "ci_x_icu" DEFAULT NULL COMMENT '受理工id',
+  `chg_telnum` character varying(80) COLLATE "ci_x_icu" DEFAULT NULL COMMENT '变更电话号码',
+  `account_tel_query_cnt` integer DEFAULT NULL COMMENT '1天同1账号同1变更号码受理次数',
+  CONSTRAINT `t_acpt_num_chg_log_day_pkey` PRIMARY KEY (`id`),
+  KEY `idx_statis_date_idx4` USING `btree` (`statis_date` NULLS FIRST),
+  KEY `idx_date_prov_staff_tel` USING `btree` (`statis_date` NULLS FIRST, `prov_code` NULLS FIRST, `chg_staff_id` NULLS FIRST, `chg_telnum` NULLS FIRST)
+) COMMENT '号码变更每日账号查询次数统计表';
+
+
+{
+	"sceneEventId": "",
+	"sceneEventLv": 3,
+	"response":[
+		{
+			"key": "prov_code",
+			"name": "省份编码",
+			"description": "省份编码",
+			"keyPath": "prov_code",
+			"type": "STRING",
+			"defaultVal": null
+		},
+		{
+			"key": "statis_date",
+			"name": "日期",
+			"description": "日期",
+			"keyPath": "statis_date",
+			"type": "STRING",
+			"defaultVal": "2000-01-01 00:00:00"
+		},
+		{
+			"key": "lg_id",
+			"name": "日志Id",
+			"description": "日志Id",
+			"keyPath": "lg_id",
+			"type": "STRING",
+			"defaultVal": null
+		},
+
+		{
+			"key": "chg_staff_id",
+			"name": "受理工id",
+			"description": "受理工id",
+			"keyPath": "chg_staff_id",
+			"type": "STRING",
+			"defaultVal": null
+		},
+
+		{
+			"key": "chg_telnum",
+			"name": "变更电话号码",
+			"description": "变更电话号码",
+			"keyPath": "chg_telnum",
+			"type": "STRING",
+			"defaultVal": null
+		},
+		{
+			"key": "account_tel_query_cnt",
+			"name": "1天同1账号同1变更号码受理次数",
+			"description": "1天同1账号同1变更号码受理次数",
+			"keyPath": "account_tel_query_cnt",
+			"type": "INTEGER",
+			"defaultVal": 0
+		}
+	]
+}
+
+
+{
+  "step1": {
+	  "dataSourceType": "SQL",
+	  "description": "1天同1账号同1变更号码受理次数-20260905-1",
+	  "eventId": 418932622356176896,
+	  "jhRuleId": 2061366248454012930,
+	  "name": "1天同1账号同1变更号码受理次数_20260915",
+	  "sceneId": 418898930816573440,
+	  "systemId": 20
+    },
+  "step2": {
+  	"tableName": "t_acpt_num_chg_log_day",
+	"timeField": "statis_date",
+	"timeBegin": "2025-09-05 00:00:00",
+	"timeEnd": "2025-09-05 23:59:59",
+  	"selectFields": [
+  		{
+			"field": "account_tel_query_cnt",
+			"fieldAs": "account_tel_query_cnt",
+			"fieldName": "1天同1账号同1变更号码受理次数",
+			"fieldType": "INTEGER",
+			"defaultVal": 0
+		},
+		{
+			"field": "chg_telnum",
+			"fieldName": "电话号码",
+			"fieldAs": "chg_telnum",
+			"fieldType": "STRING",
+			"defaultVal": "114514"
+		},
+		{
+			"field": "chg_staff_id",
+			"fieldName": "员工Id",
+			"fieldAs": "chg_staff_id",
+			"fieldType": "STRING",
+			"defaultVal": "ZK03306"
+		},
+		{
+			"field": "lg_id",
+			"fieldName": "日志Id",
+			"description": "日志Id",
+			"fieldAs": "lg_id",
+			"fieldType": "STRING",
+			"defaultVal": "0"
+		},
+		{
+			"field": "prov_code",
+			"fieldName": "省份code",
+			"description": "省份code",
+			"fieldAs": "prov_code",
+			"fieldType": "STRING",
+			"defaultVal": "00"
+		},
+		{
+			"field": "statis_date",
+			"fieldName": "数据日期",
+			"fieldAs": "statis_date",
+			"fieldType": "STRING",
+			"defaultVal": "2020-01-01"
+		}
+  	]
+  }
+}
+
+
+
+
+
+# 号码变更三日内通话记录统计表
+
+CREATE TABLE `risk_engine_platform`.`t_acpt_num_chg_contact_day` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `statis_date` date DEFAULT NULL COMMENT '统计期',
+  `prov_code` character varying(10) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '分省编码',
+  `lg_id` text COLLATE `ci_x_icu` DEFAULT NULL COMMENT '日志id',
+  `chg_staff_id` character varying(40) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '受理工id',
+  `chg_telnum` character varying(20) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '变更电话号码',
+  `is_on_the_call` character varying(40) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '受理通话状态',
+  `biz_type_id` character varying(40) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '业务类型id',
+  `has_contact_3d` tinyint DEFAULT NULL COMMENT '受理号码三天内是否存在接触记录',
+  CONSTRAINT `t_acpt_num_chg_contact_day_pkey` PRIMARY KEY (`id`),
+  KEY `idx_statis_date_idx5` USING `btree` (`statis_date` NULLS FIRST),
+  KEY `idx_date_prov_staff_tel_idx` USING `btree` (`statis_date` NULLS FIRST, `prov_code` NULLS FIRST, `chg_staff_id` NULLS FIRST, `chg_telnum` NULLS FIRST),
+  KEY `idx_biz_type` USING `btree` (`biz_type_id` NULLS FIRST)
+) COMMENT '号码变更三日内通话记录统计表';
+
+{
+	"sceneEventId": "",
+	"sceneEventLv": 3,
+	"response":[
+		{
+			"key": "prov_code",
+			"name": "省份编码",
+			"description": "省份编码",
+			"keyPath": "prov_code",
+			"type": "STRING",
+			"defaultVal": null
+		},
+		{
+			"key": "statis_date",
+			"name": "日期",
+			"description": "日期",
+			"keyPath": "statis_date",
+			"type": "STRING",
+			"defaultVal": "2000-01-01 00:00:00"
+		},
+		{
+			"key": "lg_id",
+			"name": "日志Id",
+			"description": "日志Id",
+			"keyPath": "lg_id",
+			"type": "STRING",
+			"defaultVal": null
+		},
+
+		{
+			"key": "chg_staff_id",
+			"name": "受理工id",
+			"description": "受理工id",
+			"keyPath": "chg_staff_id",
+			"type": "STRING",
+			"defaultVal": null
+		},
+
+		{
+			"key": "chg_telnum",
+			"name": "变更电话号码",
+			"description": "变更电话号码",
+			"keyPath": "chg_telnum",
+			"type": "STRING",
+			"defaultVal": null
+		},
+		{
+			"key": "is_on_the_call",
+			"name": "受理通话状态",
+			"description": "受理通话状态",
+			"keyPath": "is_on_the_call",
+			"type": "STRING",
+			"defaultVal": false
+		},
+		{
+			"key": "biz_type_id",
+			"name": "业务类型id",
+			"description": "业务类型id",
+			"keyPath": "biz_type_id",
+			"type": "STRING",
+			"defaultVal": null
+		},
+		{
+			"key": "has_contact_3d",
+			"name": "受理号码三天内是否存在接触记录",
+			"description": "受理号码三天内是否存在接触记录",
+			"keyPath": "has_contact_3d",
+			"type": "BOOLEAN",
+			"defaultVal": 0
+		}
+	]
+}
+
+
+{
+  "step1": {
+	  "dataSourceType": "SQL",
+	  "description": "号码变更三日内通话记录统计表-20260915",
+	  "eventId": 418932790577127424,
+	  "jhRuleId": 2061365274721173505,
+	  "name": "号码变更三日内通话记录统计表_20260915",
+	  "sceneId": 418898930816573440,
+	  "systemId": 20
+    },
+  "step2": {
+  	"tableName": "t_acpt_num_chg_contact_day",
+	"timeField": "statis_date",
+	"timeBegin": "2025-09-03 00:00:00",
+	"timeEnd": "2025-09-03 23:59:59",
+  	"selectFields": [
+		{
+			"field": "chg_telnum",
+			"fieldName": "电话号码",
+			"fieldAs": "chg_telnum",
+			"fieldType": "STRING",
+			"defaultVal": "114514"
+		},
+		{
+			"field": "chg_staff_id",
+			"fieldName": "员工Id",
+			"fieldAs": "chg_staff_id",
+			"fieldType": "STRING",
+			"defaultVal": "ZK03306"
+		},
+		{
+			"field": "lg_id",
+			"fieldName": "日志Id",
+			"description": "日志Id",
+			"fieldAs": "lg_id",
+			"fieldType": "STRING",
+			"defaultVal": "0"
+		},
+		{
+			"field": "prov_code",
+			"fieldName": "省份code",
+			"description": "省份code",
+			"fieldAs": "prov_code",
+			"fieldType": "STRING",
+			"defaultVal": "00"
+		},
+		{
+			"field": "statis_date",
+			"fieldName": "数据日期",
+			"fieldAs": "statis_date",
+			"fieldType": "STRING",
+			"defaultVal": "2020-01-01"
+		},
+
+		{
+			"field": "is_on_the_call",
+			"fieldName": "受理通话状态",
+			"fieldAs": "is_on_the_call",
+			"fieldType": "STRING",
+			"defaultVal": "通话中"
+		},
+		{
+			"field": "biz_type_id",
+			"fieldName": "业务类型id",
+			"fieldAs": "biz_type_id",
+			"fieldType": "STRING",
+			"defaultVal": "123"
+		},
+		{
+			"field": "has_contact_3d",
+			"fieldName": "受理号码三天内是否存在接触记录",
+			"fieldAs": "has_contact_3d",
+			"fieldType": "BOOLEAN",
+			"defaultVal": false
+		}
+  	]
+  }
+}
+
+
+
+## 任务创建
