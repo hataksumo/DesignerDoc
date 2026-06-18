@@ -110,19 +110,20 @@ ALTER TABLE jh_rule_def add column table_desc_id bigint NOT NULL default 0 COMME
 
 ALTER TABLE jh_rule_sub_def drop column actions;
 
-ALTER TABLE jh_rule_sub_def add column has_jh_action tinyint(1) NOT NULL default 0 COMMENT '是否有稽核动作';
-ALTER TABLE jh_rule_sub_def add column has_hit_rate_threshold tinyint(1) NOT NULL default 0 COMMENT '是否有命中阈值限制';
-ALTER TABLE jh_rule_sub_def add column hit_rate_threshold int NOT NULL default 0 COMMENT '命中阈值，百分制';
-ALTER TABLE jh_rule_sub_def add column inform_user_ids text NOT NULL default 0 COMMENT '通知用户Id列表';
-ALTER TABLE jh_rule_sub_def add column inform_methods text NOT NULL default 0 COMMENT '通知方式';
+ALTER TABLE jh_rule_def_version add column has_jh_action tinyint(1) NOT NULL default 0 COMMENT '是否有稽核动作';
+ALTER TABLE jh_rule_def_version add column has_hit_rate_threshold tinyint(1) NOT NULL default 0 COMMENT '是否有命中阈值限制';
+ALTER TABLE jh_rule_def_version add column hit_rate_threshold int NOT NULL default 0 COMMENT '命中阈值，百分制';
+ALTER TABLE jh_rule_def_version add column inform_user_ids text NOT NULL default 0 COMMENT '通知用户Id列表';
+ALTER TABLE jh_rule_def_version add column inform_methods text NOT NULL default 0 COMMENT '通知方式';
 
 
 
-CREATE TABLE `jh_rule_sub_def_inform_user`(
+CREATE TABLE `jh_rule_def_ver_inform_user`(
   `id` bigint NOT NULL COMMENT '主键ID，雪花算法',
   `jh_rule_id` bigint NOT NULL COMMENT '稽核规则Id',
   `jh_rule_code` varchar(64) NOT NULL COMMENT '规则code',
-  `jh_rule_sub_def_id` bigint NOT NULL COMMENT '子规则id',
+  `jh_rule_ver_id` bigint NOT NULL COMMENT '稽核规则版本Id',
+  `jh_rule_ver_code` varchar(64) NOT NULL COMMENT '稽核规则版本code',
   `user_id` bigint NOT NULL COMMENT '用户Id',
   `user_name` varchar(64) NULL COMMENT '用户名',
 
@@ -130,7 +131,7 @@ CREATE TABLE `jh_rule_sub_def_inform_user`(
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
 
   CONSTRAINT `jh_jh_rule_sub_def_inform_user_pkey` PRIMARY KEY (`id`),
-  CONSTRAINT `uidx_jh_rule_sub_def_inform_user_rel_key` unique KEY(`jh_rule_sub_def_id`,`user_id`),
+  CONSTRAINT `uidx_jh_rule_ver_inform_user_rel_key` unique KEY(`jh_rule_ver_id`,`user_id`),
   INDEX `idx_jh_rule_sub_def_inform_user_rel_rule_id`(`jh_rule_id`)
 ) 
 COMMENT '告警通知表'
