@@ -15,3 +15,7 @@ alter table jh_rule_task_version_file_status alter column file_attach_id drop no
 
 alter table rc_event_inform MODIFY column event_code char(64) not null comment "事件code";
 alter table rc_event_inform MODIFY column cal_figure_def_code char(64) not null comment "计算指标数据源code";
+
+
+alter table rc_rule_call_log add column request_id varchar(128) not null default "0" comment "请求id";
+CREATE INDEX idx_rc_rule_call_log_request_id ON rc_rule_call_log(request_id);
