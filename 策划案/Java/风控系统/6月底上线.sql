@@ -34,6 +34,7 @@ CREATE TABLE `jh_table_desc_figure_source_var` (
   `enum_code` varchar(100) NULL COMMENT '枚举code',
   `default_val` varchar(100) NOT NULL COMMENT '默认值',
   `order_idx` int NOT NULL default 0 COMMENT '字段排序',
+  `is_select` tinyint NOT NULL default 1 COMMENT '是否参与查找',
 
 
   `create_user_id` bigint NOT NULL COMMENT '创建者用户Id',
