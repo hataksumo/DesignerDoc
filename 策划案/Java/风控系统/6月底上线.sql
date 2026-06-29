@@ -34,6 +34,7 @@ CREATE TABLE `jh_table_desc_figure_source_var` (
   `enum_code` varchar(100) NULL COMMENT '枚举code',
   `default_val` varchar(100) NOT NULL COMMENT '默认值',
   `order_idx` int NOT NULL default 0 COMMENT '字段排序',
+  `is_select` tinyint NOT NULL default 1 COMMENT '是否参与查找',
 
 
   `create_user_id` bigint NOT NULL COMMENT '创建者用户Id',
@@ -132,7 +133,7 @@ CREATE TABLE `jh_rule_def_ver_inform_user`(
   `user_name` varchar(64) NULL COMMENT '用户名',
 
   `create_time` datetime NOT NULL COMMENT '创建的时间',
-  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
 
   CONSTRAINT `jh_jh_rule_sub_def_inform_user_pkey` PRIMARY KEY (`id`),
   CONSTRAINT `uidx_jh_rule_ver_inform_user_rel_key` unique KEY(`jh_rule_ver_id`,`user_id`),
