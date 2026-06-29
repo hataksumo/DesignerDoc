@@ -98,23 +98,27 @@ CREATE TABLE `jh_script_figure_source_var` (
 COMMENT '表描述数据源字段'
 
 
-ALTER TABLE jh_rule_def drop column event_id;
-ALTER TABLE jh_rule_def drop column event_code;
+-- ALTER TABLE jh_rule_def drop column event_id;
+-- ALTER TABLE jh_rule_def drop column event_code;
+
+ALTER TABLE jh_rule_def alter column event_id drop not null;
+ALTER TABLE jh_rule_def alter column event_code drop not null;
 
 ALTER TABLE jh_rule_def alter column scene_id drop not null;
 ALTER TABLE jh_rule_def alter column scene_code drop not null;
 
 
 ALTER TABLE jh_rule_def add column table_desc_id bigint NOT NULL default 0 COMMENT '表描述数据源Id';
+ALTER TABLE jh_rule_def add column support_auto_create tinyint(1) NOT null default 0 COMMENT '是否支持自动创建任务';
 
 
 ALTER TABLE jh_rule_sub_def drop column actions;
 
-ALTER TABLE jh_rule_def_version add column has_jh_action tinyint(1) NOT NULL default 0 COMMENT '是否有稽核动作';
-ALTER TABLE jh_rule_def_version add column has_hit_rate_threshold tinyint(1) NOT NULL default 0 COMMENT '是否有命中阈值限制';
-ALTER TABLE jh_rule_def_version add column hit_rate_threshold int NOT NULL default 0 COMMENT '命中阈值，百分制';
-ALTER TABLE jh_rule_def_version add column inform_user_ids text NOT NULL default 0 COMMENT '通知用户Id列表';
-ALTER TABLE jh_rule_def_version add column inform_methods text NOT NULL default 0 COMMENT '通知方式';
+ALTER TABLE jh_rule_def_ver add column has_jh_action tinyint(1) NOT NULL default 0 COMMENT '是否有稽核动作';
+ALTER TABLE jh_rule_def_ver add column hit_rate_threshold int NOT NULL default 0 COMMENT '命中阈值，百分制';
+
+ALTER TABLE jh_rule_def_ver add column inform_user_ids text NOT NULL default "[]" COMMENT '通知用户Id列表';
+ALTER TABLE jh_rule_def_ver add column inform_methods text NOT NULL default 0 COMMENT '通知方式';
 
 
 
@@ -142,6 +146,7 @@ COMMENT '告警通知表'
 CREATE TABLE `jh_figure` (
 `id` bigint NOT NULL COMMENT '主键ID，雪花算法',
 `figure_type` tinyint NOT NULL COMMENT '指标类型',
+`var_type` tinyint NOT NULL COMMENT '指标变量类型',
 `source_code` char(32) NOT NULL COMMENT '来源的code',
 `source_id` bigint NOT NULL COMMENT '来源表的Id',
 `source_var_id` bigint NOT NULL COMMENT '数据源字段表id',
@@ -166,6 +171,12 @@ constraint `uidx_jh_figure_source_var_id` UNIQUE(`source_var_id`)
 )
 COMMENT '看板指标'
 
+alter table jh_rule_task add column task_create_type tinyint not null default 1 comment '任务创建类型，1手动创建，2自动创建';
+alter table jh_rule_task drop column event_id;
+
+alter table jh_rule_task_version add column is_handled tinyint not null default 0 comment '是否已处理';
+alter table jh_rule_task_version add column handled_msg varchar(512) null  comment '处理意见';
 
 
-
+alter table rc_rule_call_log_none_hit add column request_id varchar(128) not null default "0" comment "请求id";
+create index idx_rc_rule_call_log_none_hit_request_id on rc_rule_call_log(request_id);
