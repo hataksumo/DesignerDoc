@@ -167,6 +167,8 @@ constraint `uidx_jh_figure_source_var_id` UNIQUE(`source_var_id`)
 )
 COMMENT '看板指标'
 
+alter table jh_rule_call_figure_log add column figure_key varchar(64) null COMMENT '指标的键'
+
 
 
 
