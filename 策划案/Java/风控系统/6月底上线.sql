@@ -27,7 +27,7 @@ CREATE TABLE `jh_table_desc_figure_source_var` (
   `id` bigint NOT NULL COMMENT '主键ID，雪花算法',
   `source_id`  bigint NOT NULL COMMENT '数据源主表id',
   `field_script` varchar(100)  NOT NULL COMMENT '字段脚本',
-  `field_as` varchar(50) NOT NULL COMMENT '字段as,键',
+  `field_as` varchar(100) NOT NULL COMMENT '字段as,键',
   `name` varchar(64)  DEFAULT NULL COMMENT '字段名称',
   `description` varchar(1024)  DEFAULT NULL COMMENT '字段描述',
   `var_type` tinyint NOT NULL COMMENT '变量类型',
@@ -177,6 +177,9 @@ alter table jh_rule_task drop column event_id;
 
 alter table jh_rule_task_version add column is_handled tinyint not null default 0 comment '是否已处理';
 alter table jh_rule_task_version add column handled_msg varchar(512) null  comment '处理意见';
+alter table jh_rule_task_version add column handle_user_id int8 null comment '处理人id';
+alter table jh_rule_task_version add column handle_user_name varchar(128) null comment '处理人名字';
+alter table jh_rule_task_version add column handled_time datetime null comment '处理时间';
 
 
 alter table rc_rule_call_log_none_hit add column request_id varchar(128) not null default "0" comment "请求id";
