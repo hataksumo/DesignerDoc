@@ -10,6 +10,10 @@ alter table rc_interface_def add column refresh_dua int4 not null default 3600 c
 CREATE INDEX idx_rc_figure_data_modify_time ON rc_figure_data(modify_time);
 CREATE INDEX idx_none_hit_create_time ON rc_rule_call_log_none_hit(create_time);
 
+ALTER TABLE rc_figure drop constraint udix_name;
+
+
+
 -- 数据整理
 
 -- 每周1次
