@@ -1,14 +1,3 @@
--- 测试订单模拟数据
--- 明细表 test_order_detail：10000 条
--- 商品 ID：50 种，每种商品 1~3 个 SKU
--- 订单完成时间：2026-06-01 ~ 2026-10-01
-
-SET NAMES utf8mb4;
-
-DELETE FROM test_order_detail;
-DELETE FROM test_order_header;
-
-
 INSERT INTO test_order_header (id, order_no, total_amount, finish_time, create_time, update_time) VALUES
 (1, 'TEST202600000001', 4741.76, '2026-09-30 23:46:23', '2026-09-30 05:55:23', '2026-09-30 05:55:23'),
 (2, 'TEST202600000002', 11406.22, '2026-07-17 15:28:34', '2026-07-17 04:14:34', '2026-07-17 04:14:34'),

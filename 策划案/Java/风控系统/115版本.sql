@@ -1,10 +1,10 @@
 CREATE TABLE `jh_table_desc_figure_source_def` (
   `id` bigint NOT NULL COMMENT '主键ID，雪花算法',
-  `code` char(50)  NOT NULL COMMENT '接口code',
+  `code` char(32)  NOT NULL COMMENT '接口code',
   `name` varchar(128)  DEFAULT NULL COMMENT '名称',
   `description` varchar(1024) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '描述',
   `has_table_info` tinyint(1) NOT NULL default 0 COMMENT '是否有表信息',
-  `table_name` varchar(256) NULL COMMENT '表名',
+  `table_name` varchar(1024) NULL COMMENT '表名',
   `table_comment` varchar(256) NULL COMMENT '表名',
   `group_phrases` varchar(256) NULL COMMENT '分组语句',
   `data_sync_desc` varchar(256) NULL COMMENT '更新频率描述',
@@ -32,7 +32,7 @@ CREATE TABLE `jh_table_desc_figure_source_var` (
   `description` varchar(1024)  DEFAULT NULL COMMENT '字段描述',
   `var_type` tinyint NOT NULL COMMENT '变量类型',
   `enum_code` varchar(100) NULL COMMENT '枚举code',
-  `default_val` varchar(100) NOT NULL COMMENT '默认值',
+  `default_val` varchar(64) NOT NULL COMMENT '默认值',
   `order_idx` int NOT NULL default 0 COMMENT '字段排序',
   `is_select` tinyint NOT NULL default 1 COMMENT '是否参与查找',
 
@@ -51,7 +51,7 @@ COMMENT '表描述数据源字段'
 
 CREATE TABLE `jh_script_figure_source_def`(
   `id` bigint NOT NULL COMMENT '主键ID，雪花算法',
-  `code` char(50)  NOT NULL COMMENT '接口code',
+  `code` char(32)  NOT NULL COMMENT '接口code',
   `name` varchar(128)  DEFAULT NULL COMMENT '名称',
   `description` varchar(1024)  DEFAULT NULL COMMENT '描述',
   `table_desc_id` bigint NOT NULL COMMENT '表描述数据源Id',
@@ -83,7 +83,7 @@ CREATE TABLE `jh_script_figure_source_var` (
   `description` varchar(1024)  DEFAULT NULL COMMENT '字段描述',
   `var_type` tinyint NOT NULL COMMENT '变量类型',
   `enum_code` varchar(100) NULL COMMENT '枚举code',
-  `default_val` varchar(100) NOT NULL COMMENT '默认值',
+  `default_val` varchar(64) NOT NULL COMMENT '默认值',
   `order_idx` int NOT NULL default 0 COMMENT '字段排序',
 
   `create_user_id` bigint NOT NULL COMMENT '创建者用户Id',
@@ -143,7 +143,6 @@ COMMENT '告警通知表'
 
 
 
-
 CREATE TABLE `jh_figure` (
 `id` bigint NOT NULL COMMENT '主键ID，雪花算法',
 `figure_type` tinyint NOT NULL COMMENT '指标类型',
@@ -159,7 +158,7 @@ CREATE TABLE `jh_figure` (
 `desensitize_type` integer DEFAULT 0 COMMENT '脱敏类型 0 不脱敏，1手机号类脱敏 2IP类脱敏 3地址类脱敏 4姓名类脱敏 5密钥脱敏 默认0不脱敏',
 `system_id` bigint NOT NULL COMMENT '所属系统',
 `create_user_id` bigint NOT NULL COMMENT '创建者用户Id',
-`create_user` varchar(64) COLLATE `ci_x_icu` NOT NULL COMMENT '创建者用户昵称',
+`create_user` varchar(64)  NOT NULL COMMENT '创建者用户昵称',
 `create_time` datetime NOT NULL COMMENT '创建的时间',
 `update_user_id` bigint DEFAULT NULL COMMENT '修改用户Id',
 `update_user` varchar(64) DEFAULT NULL COMMENT '修改者用户昵称',
@@ -170,13 +169,13 @@ CONSTRAINT `jh_figure_pkey` PRIMARY KEY (`id`),
 CONSTRAINT `uidx_jh_figure_code` UNIQUE (`code`),
 constraint `uidx_jh_figure_source_var_id` UNIQUE(`source_var_id`)
 )
-COMMENT '看板指标'
+COMMENT '看板指标';
 
 alter table jh_rule_call_figure_log add column figure_key varchar(64) null COMMENT '指标的键'
 alter table jh_rule_task add column task_create_type tinyint not null default 1 comment '任务创建类型，1手动创建，2自动创建';
 alter table jh_rule_task drop column event_id;
 
-alter table jh_rule_task_version add column is_handled tinyint not null default 0 comment '是否已处理';
+alter table jh_rule_task_version add column is_handled tinyint not null default 1 comment '是否已处理';
 alter table jh_rule_task_version add column handled_msg varchar(512) null  comment '处理意见';
 alter table jh_rule_task_version add column handle_user_id int8 null comment '处理人id';
 alter table jh_rule_task_version add column handle_user_name varchar(128) null comment '处理人名字';
@@ -185,3 +184,154 @@ alter table jh_rule_task_version add column handled_time datetime null comment '
 
 alter table rc_rule_call_log_none_hit add column request_id varchar(128) not null default "0" comment "请求id";
 create index idx_rc_rule_call_log_none_hit_request_id on rc_rule_call_log(request_id);
+
+
+-- 风控事件日志表
+CREATE TABLE `rc_event_fire_log` (
+  `id` bigint NOT NULL COMMENT '主键ID，雪花算法',
+
+  `request_id` varchar(128) NOT NULL COMMENT '请求Id',
+  `event_code` char(64) NOT NULL COMMENT '事件Code',
+  `event_id` bigint NOT NULL COMMENT '事件Id',
+
+  `is_open` tinyint(1) NOT NULL COMMENT '是否打开',
+  `rule_order_strategy` tinyint NOT NULL COMMENT '风控优先级策略',
+
+
+  `begin_time` datetime NOT NULL  COMMENT '触发时间',
+  `execute_time` int NOT NULL COMMENT '执行时间，毫秒',
+  
+  `rule_level` tinyint NOT NULL COMMENT '风险等级',
+  `risk_suggestion_measure` tinyint NOT NULL COMMENT '是否打开',
+
+  `rule_id` bigint NULL COMMENT '命中规则Id',
+  `rule_code` char(32) NULL COMMENT '命中规则Code',
+  `rule_name` varchar(128) NULL COMMENT '命中规则名称',
+
+
+  `create_user_id` bigint NOT NULL COMMENT '创建者用户Id',
+  `create_user` varchar(64)  NOT NULL COMMENT '创建者用户昵称',
+  `create_time` datetime NOT NULL COMMENT '创建的时间',
+  `update_user_id` bigint DEFAULT NULL COMMENT '修改用户Id',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '修改者用户昵称',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `version` integer NOT NULL COMMENT '乐观锁'
+)COMMENT '风控事件日志';
+
+
+
+CREATE TABLE `test_mp_data` (
+  `id` bigint NOT NULL COMMENT '主键ID，雪花算法',
+
+  `int_a` int4  NULL COMMENT 'intA',
+  `int_b` int4  NULL COMMENT 'intB',
+
+  `double_a` double  NULL COMMENT 'doubleA',
+  `double_b` double  NULL COMMENT 'doubleB',
+
+  `long_a` int8  NULL COMMENT 'longA',
+  `long_b` int8  NULL COMMENT 'longB',
+
+  `date_time_a` datetime null COMMENT 'date_time_a',
+  `date_a` date null COMMENT 'date_a',
+  `time_a` time null COMMENT 'time_a',
+
+  `test_json_data` text NULL COMMENT 'test_json_data',
+  `test_json_arr` text NULL COMMENT 'test_json_array',
+  `test_json_map` text NULL COMMENT 'test_json_map',
+  `str_arr` text NULL COMMENT 'str_arr',
+  `flex_map` text NULL COMMENT 'flex_map',
+
+
+  `create_user_id` bigint NOT NULL COMMENT '创建者用户Id',
+  `create_user` varchar(64)  NOT NULL COMMENT '创建者用户昵称',
+  `create_time` datetime NOT NULL COMMENT '创建的时间',
+  `update_user_id` bigint DEFAULT NULL COMMENT '修改用户Id',
+  `update_user` varchar(64) DEFAULT NULL COMMENT '修改者用户昵称',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `version` integer NOT NULL COMMENT '乐观锁'
+)COMMENT 'mp测试表';
+
+
+
+
+
+
+
+
+-- 清除旧数据
+delete from jh_rule_def where table_desc_id = 0;
+DELETE FROM jh_rule_def_ver 
+USING jh_rule_def 
+WHERE jh_rule_def_ver.rule_id = jh_rule_def.id 
+  AND jh_rule_def.id IS NULL;
+
+delete from jh_rule_sub_def
+using jh_rule_def_ver
+where jh_rule_sub_def.rule_ver_id= jh_rule_def_ver.id
+and jh_rule_def_ver.id is null;
+
+delete from jh_rule_sub_def_option
+using jh_rule_sub_def
+where jh_rule_sub_def_option.rule_ver_sub_id = jh_rule_sub_def.id
+and jh_rule_sub_def.id is null;
+
+
+
+delete from jh_rule_call_log
+using jh_rule_def
+where jh_rule_call_log.rule_id = jh_rule_def.id 
+and jh_rule_def.id IS NULL;
+
+
+delete from jh_rule_call_log_none_hit
+using jh_rule_def
+where jh_rule_call_log_none_hit.rule_id = jh_rule_def.id 
+and jh_rule_def.id IS NULL;
+
+
+DELETE FROM jh_rule_call_figure_log figure
+WHERE NOT EXISTS (
+    SELECT 1 
+    FROM jh_rule_call_log log1 
+    WHERE log1.id = figure.rule_call_log_id
+)
+AND NOT EXISTS (
+    SELECT 1 
+    FROM jh_rule_call_log_none_hit log2 
+    WHERE log2.id = figure.rule_call_log_id
+);
+
+DELETE from jh_rule_call_log_param
+USING jh_rule_call_figure_log
+WHERE log.id = jh_rule_call_log_param.jh_log_id and jh_rule_call_figure_log.id is null;
+
+delete from jh_rule_task
+using jh_rule_def
+where jh_rule_task.jh_rule_id = jh_rule_def.id
+and jh_rule_task.id is null;
+
+delete from jh_rule_task_version
+using jh_rule_task
+where jh_rule_task_version.task_id = jh_rule_task.id
+and jh_rule_task.id is null;
+
+delete from jh_rule_task_version_file_param_config
+using jh_rule_task_version
+where jh_rule_task_version_file_param_config.task_ver_id = jh_rule_task_version.id
+and jh_rule_task_version.id is null;
+
+delete from jh_rule_task_version_file_status
+using jh_rule_task_version
+where jh_rule_task_version_file_status.task_ver_id = jh_rule_task_version.id
+and jh_rule_task_version.id is null;
+
+delete from jh_rule_ver_hit
+using jh_rule_def_ver
+where jh_rule_ver_hit.rule_ver_id = jh_rule_def_ver.id
+and jh_rule_def_ver.id is null;
+
+delete from jh_rule_task_version_daily_stat
+using jh_rule_task
+where jh_rule_task_version_daily_stat.task_id = jh_rule_task.id
+and jh_rule_task.id is null;
