@@ -65,7 +65,7 @@
         {
             "name" : "销售总数量",
             "fieldScript" : "SUM(detail.sale_count)",
-            "fieldAs" : "saleCpint",
+            "fieldAs" : "saleCount",
             "description" : "销售数量",
             "varType" : "INTEGER",
             "defaultVal" : 0,

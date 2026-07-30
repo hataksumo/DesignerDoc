@@ -7,6 +7,7 @@ CREATE TABLE `jh_table_desc_figure_source_def` (
   `table_name` varchar(1024) NULL COMMENT '表名',
   `table_comment` varchar(256) NULL COMMENT '表名',
   `group_phrases` varchar(256) NULL COMMENT '分组语句',
+  `ext_where` varchar(1024) NULL COMMENT '额外条件',
   `data_sync_desc` varchar(256) NULL COMMENT '更新频率描述',
   `system_id` bigint NOT NULL default 0 COMMENT '所属系统',
   `system_code` varchar(64) NULL COMMENT '所属系统code',
@@ -35,6 +36,7 @@ CREATE TABLE `jh_table_desc_figure_source_var` (
   `default_val` varchar(64) NOT NULL COMMENT '默认值',
   `order_idx` int NOT NULL default 0 COMMENT '字段排序',
   `is_select` tinyint NOT NULL default 1 COMMENT '是否参与查找',
+  `is_filter_field` tinyint NOT NULL default 1 COMMENT '是否可作为筛选字段',
 
 
   `create_user_id` bigint NOT NULL COMMENT '创建者用户Id',
@@ -61,6 +63,7 @@ CREATE TABLE `jh_script_figure_source_def`(
   `system_id` bigint NOT NULL default 0 COMMENT '所属系统',
   `system_code` varchar(64) NULL COMMENT '所属系统code',
   `status` tinyint NOT NULL COMMENT '状态',
+  `figure_ttl` int4 NOT NULL default 7200 COMMENT '指标缓存时间(s)',
 
   `create_user_id` bigint NOT NULL COMMENT '创建者用户Id',
   `create_user` varchar(64) COLLATE `ci_x_icu` NOT NULL COMMENT '创建者用户昵称',
@@ -205,6 +208,7 @@ CREATE TABLE `rc_event_fire_log` (
   `risk_suggestion_measure` tinyint NOT NULL COMMENT '是否打开',
 
   `rule_id` bigint NULL COMMENT '命中规则Id',
+  `rule_ver_id` bigint NULL COMMENT '命中规则版本Id',
   `rule_code` char(32) NULL COMMENT '命中规则Code',
   `rule_name` varchar(128) NULL COMMENT '命中规则名称',
 
@@ -215,7 +219,11 @@ CREATE TABLE `rc_event_fire_log` (
   `update_user_id` bigint DEFAULT NULL COMMENT '修改用户Id',
   `update_user` varchar(64) DEFAULT NULL COMMENT '修改者用户昵称',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
-  `version` integer NOT NULL COMMENT '乐观锁'
+  `version` integer NOT NULL COMMENT '乐观锁',
+
+
+  INDEX  idx_rc_event_fire_log_request_id(request_id)
+
 )COMMENT '风控事件日志';
 
 
@@ -253,18 +261,17 @@ CREATE TABLE `test_mp_data` (
 )COMMENT 'mp测试表';
 
 
-
-
-
+alter table jh_rule_task_version alter column time_begin type varchar(128);
+alter table jh_rule_task_version alter column time_end type varchar(128);
 
 
 
 -- 清除旧数据
-delete from jh_rule_def where table_desc_id = 0;
+delete from jh_rule_def where table_desc_id = 0 or table_desc_id is null;
 DELETE FROM jh_rule_def_ver 
 USING jh_rule_def 
 WHERE jh_rule_def_ver.rule_id = jh_rule_def.id 
-  AND jh_rule_def.id IS NULL;
+  AND (jh_rule_def.id IS NULL OR jh_rule_def.id = 0);
 
 delete from jh_rule_sub_def
 using jh_rule_def_ver
