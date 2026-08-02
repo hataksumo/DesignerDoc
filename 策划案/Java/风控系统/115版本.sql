@@ -19,6 +19,7 @@ CREATE TABLE `jh_table_desc_figure_source_def` (
   `update_user` varchar(64) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '修改者用户昵称',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `version` integer NOT NULL COMMENT '乐观锁',
+
   CONSTRAINT `jh_table_desc_figure_source_def_pkey` PRIMARY KEY (`id`),
   CONSTRAINT `uidx_jh_table_desc_figure_source_def_code` UNIQUE (`code`)
 )
@@ -46,6 +47,7 @@ CREATE TABLE `jh_table_desc_figure_source_var` (
   `update_user` character varying(64) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '修改者用户昵称',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `version` integer NOT NULL COMMENT '乐观锁',
+
   CONSTRAINT  `jh_table_desc_figure_source_var_pkey` PRIMARY KEY(`id`),
   CONSTRAINT  `uidx_jh_table_desc_figure_source_var_field_as` UNIQUE KEY(`source_id`,`field_as`)
 )
@@ -72,6 +74,7 @@ CREATE TABLE `jh_script_figure_source_def`(
   `update_user` varchar(64) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '修改者用户昵称',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `version` integer NOT NULL COMMENT '乐观锁',
+
   CONSTRAINT `jh_script_figure_source_def_pkey` PRIMARY KEY(`id`),
   CONSTRAINT `uidx_jh_script_figure_source_def_code` UNIQUE KEY(`code`)
 )
@@ -96,6 +99,7 @@ CREATE TABLE `jh_script_figure_source_var` (
   `update_user` character varying(64) COLLATE `ci_x_icu` DEFAULT NULL COMMENT '修改者用户昵称',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `version` integer NOT NULL COMMENT '乐观锁',
+
   CONSTRAINT `jh_script_figure_source_var_pkey` PRIMARY KEY (`id`),
   CONSTRAINT `uidx_jh_script_figure_source_var_field_key` UNIQUE KEY(`source_id`,`field_key`)
 )
@@ -221,7 +225,7 @@ CREATE TABLE `rc_event_fire_log` (
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `version` integer NOT NULL COMMENT '乐观锁',
 
-
+  CONSTRAINT `rc_event_fire_log_pkey` PRIMARY KEY (`id`),
   INDEX  idx_rc_event_fire_log_request_id(request_id)
 
 )COMMENT '风控事件日志';
@@ -258,6 +262,8 @@ CREATE TABLE `test_mp_data` (
   `update_user` varchar(64) DEFAULT NULL COMMENT '修改者用户昵称',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `version` integer NOT NULL COMMENT '乐观锁'
+
+  CONSTRAINT `test_mp_data_pkey` PRIMARY KEY (`id`)
 )COMMENT 'mp测试表';
 
 
