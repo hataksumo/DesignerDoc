@@ -40,3 +40,46 @@ CREATE TABLE test_order_detail (
 ) COMMENT = '测试订单明细表';
 
 
+
+
+CREATE TABLE test_order_return_header (
+    id BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+
+    order_no VARCHAR(64) NOT NULL COMMENT '订单号',
+    return_no VARCHAR(64) NOT NULL COMMENT '退货单号',
+
+    total_amount DECIMAL(18, 2) NOT NULL DEFAULT 0.00 COMMENT '订单总金额',
+
+    finish_time DATETIME DEFAULT NULL COMMENT '退货完成时间',
+
+    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_order_no (order_no),
+    UNIQUE KEY uk_return_no (return_no),
+    KEY idx_finish_time (finish_time)
+) COMMENT = '测试退货单头表';
+
+
+CREATE TABLE test_order_return_detail (
+    id BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+
+    return_no VARCHAR(64) NOT NULL COMMENT '退货单号',
+
+    goods_id BIGINT NOT NULL COMMENT '商品ID',
+    sku_id BIGINT NOT NULL COMMENT 'SKU ID',
+    goods_name VARCHAR(255) NOT NULL COMMENT '商品名称',
+
+    sale_count INT NOT NULL DEFAULT 0 COMMENT 'SKU出售数量',
+    order_amount DECIMAL(18, 2) NOT NULL DEFAULT 0.00 COMMENT '该SKU订单金额',
+
+    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+
+    PRIMARY KEY (id),
+
+    KEY idx_return_no (return_no),
+    KEY idx_goods_id (goods_id),
+    KEY idx_sku_id (sku_id)
+) COMMENT = '测试退货单明细表';
