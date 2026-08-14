@@ -182,6 +182,7 @@ alter table jh_rule_call_figure_log add column figure_key varchar(64) null COMME
 alter table jh_rule_task add column task_create_type tinyint not null default 1 comment '任务创建类型，1手动创建，2自动创建';
 alter table jh_rule_task drop column event_id;
 
+alter table jh_rule_task_version add column export_status tinyint not null default 1 comment '导出状态';
 alter table jh_rule_task_version add column is_handled tinyint not null default 1 comment '是否已处理';
 alter table jh_rule_task_version add column handled_msg varchar(512) null  comment '处理意见';
 alter table jh_rule_task_version add column handle_user_id int8 null comment '处理人id';

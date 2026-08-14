@@ -1,0 +1,9 @@
+truncate jh_rule_call_log;
+truncate jh_rule_call_log_none_hit;
+truncate jh_rule_call_figure_log;
+truncate jh_rule_call_log_param;
+truncate jh_rule_task;
+truncate jh_rule_task_version;
+truncate jh_rule_task_version_daily_stat;
+truncate jh_rule_task_version_file_param_config;
+truncate jh_rule_task_version_file_status;

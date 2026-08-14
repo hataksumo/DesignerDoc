@@ -1,0 +1,5 @@
+truncate rc_rule_call_log;
+truncate rc_rule_call_log_none_hit;
+truncate rc_rule_call_figure_log;
+truncate rc_rule_ver_hit;
+truncate rc_rule_ver_hit_daily_stat;
